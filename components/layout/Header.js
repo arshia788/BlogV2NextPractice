@@ -1,7 +1,7 @@
 
 import HeaderSearch from 'components/module/HeaderSearch'
 import LogInHeader from 'components/module/LogInHeader'
-import Image from 'next/image'
+import Image from 'next/image';
 
 export default function Header() {
 

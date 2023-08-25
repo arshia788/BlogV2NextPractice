@@ -23,9 +23,9 @@ export default function LogInHeader() {
         <div className='flex justify-between items-center gap-x-2  w-[240px]'>
 
             {/* signin */}
-            <div className='bg-white border-none rounded px-2 py-1'>
+            <button className='bg-white border-none rounded px-2 py-1'>
                 <p>signUp / signIn</p>
-            </div>
+            </button>
 
             {/* notif */}
             <div className='relative'>
