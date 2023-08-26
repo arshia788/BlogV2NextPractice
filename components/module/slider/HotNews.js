@@ -24,19 +24,18 @@ export default function HotNews() {
         },
     ];
 
-    const [listHotNews, setListHowNews] = useState(newslist[0]);
+    const [activeSlides, setActiveSlides] = useState(newslist[0]);
 
     setTimeout(()=>{
-
-        const item= listHotNews.value;
+        const item= activeSlides.value;
 
         if(item === newslist.length -1){
-            setListHowNews(newslist[0])
+            setActiveSlides(newslist[0])
         }
         else{
 
-            // in dar asal misheh ye array ba [value + 1]
-            setListHowNews(newslist[item + 1])
+            // yani bia in array ro begiri hala on value ke shodeh on item ro +1 bokon. 
+            setActiveSlides(newslist[item + 1])
         }
 
     },3000)
@@ -44,14 +43,16 @@ export default function HotNews() {
     return (
         <div>
             <div className="flex justify-start items-start">
+
                 <span className="font-bold">
                     Hotest:
                 </span>
-                <Link
-                    className="line-clamp-1 w-[500px]"
-                    href={listHotNews.link}>
 
-                    {listHotNews.title}
+                <Link
+                    className="line-clamp-1 w-full"
+                    href={activeSlides.link}>
+
+                    {activeSlides.title}
                 </Link>
             </div>
         </div>

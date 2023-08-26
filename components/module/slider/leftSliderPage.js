@@ -1,11 +1,13 @@
 'use client';
 
-import React, { useState } from 'react'
-import ImageSlider from './ImageSlider'
-import SliderButtons from './SliderButtons'
+import React, { useState } from 'react';
+import ImageSlider from './ImageSlider';
+import SliderButtons from './SliderButtons';
 import SliderCircles from './SliderCircles';
 
+
 export default function LeftSliderPage() {
+
 
   const posts = [
     {
@@ -43,14 +45,15 @@ export default function LeftSliderPage() {
       value: 5
     }
     ,
-  ]
+  ];
 
   const [activeSlide, setActiveSlide] = useState(posts[0]);
+  console.log(activeSlide);
 
   return (
     <div className='relative flex justify-between items-center w-full h-[400px] p-2'>
 
-      <div className='flex flex-col gap-6 '>
+      <div className='flex flex-col gap-6'>
         {
           posts.map((item, index) => {
             return (
