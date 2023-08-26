@@ -3,7 +3,6 @@ import React from 'react'
 
 export default function ImageSlider({data}) {
 
-  console.log(data);
 
   return (
     <div className='relative w-full h-[400px] p-2'>
