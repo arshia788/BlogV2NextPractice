@@ -48,7 +48,6 @@ export default function LeftSliderPage() {
   ];
 
   const [activeSlide, setActiveSlide] = useState(posts[0]);
-  console.log(activeSlide);
 
   return (
     <div className='relative flex justify-between items-center w-full h-[400px] p-2'>

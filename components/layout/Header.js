@@ -1,6 +1,6 @@
 
-import HeaderSearch from 'components/module/HeaderSearch'
-import LogInHeader from 'components/module/LogInHeader'
+import LogInHeader from 'components/module/header/LogInHeader';
+import HeaderSearch from 'components/module/header/HeaderSearch';
 import Image from 'next/image';
 
 export default function Header() {

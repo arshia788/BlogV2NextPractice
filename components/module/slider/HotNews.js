@@ -25,6 +25,7 @@ export default function HotNews() {
     ];
 
     const [activeSlides, setActiveSlides] = useState(newslist[0]);
+    console.log(activeSlides);
 
     setTimeout(()=>{
         const item= activeSlides.value;
@@ -33,8 +34,6 @@ export default function HotNews() {
             setActiveSlides(newslist[0])
         }
         else{
-
-            // yani bia in array ro begiri hala on value ke shodeh on item ro +1 bokon. 
             setActiveSlides(newslist[item + 1])
         }
 

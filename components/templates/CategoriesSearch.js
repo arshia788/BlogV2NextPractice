@@ -1,4 +1,4 @@
-import CategoriesBoxes from 'components/module/CategoriesBoxes';
+import CategoriesBoxes from 'components/module/slider/CategoriesBoxes';
 
 
 export default function CategoriesSearch() {
