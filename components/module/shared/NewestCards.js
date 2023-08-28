@@ -11,10 +11,13 @@ export default function NewestCards({ data }) {
 
 
             <div className="flex justify-center items-center">
+
                 <Link href={data.slug} className="relative w-[20rem] h-[15rem] rounded-lg">
                     <Image src={data.image} alt={data.title} width={1000} height={700} className=" rounded-md" />
                 </Link>
+                
             </div>
+
 
             <div className='flex flex-col justify-between gap-y-4 h-[220px]'>
 

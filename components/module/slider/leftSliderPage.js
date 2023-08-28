@@ -52,7 +52,7 @@ export default function LeftSliderPage() {
   return (
     <div className='relative flex justify-between items-center w-full h-[400px] p-2'>
 
-      <div className='flex flex-col gap-6'>
+      <div className='flex flex-col gap-7'>
         {
           posts.map((item, index) => {
             return (

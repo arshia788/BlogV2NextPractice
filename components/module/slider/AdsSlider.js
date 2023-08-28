@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function AdsSlider() {
   return (
-    <div className='flex flex-col  h-full '>
+    <div className='flex flex-col  h-[360px] '>
 
       <Image
         className="h-[180px] w-full rounded-lg mb-4"
