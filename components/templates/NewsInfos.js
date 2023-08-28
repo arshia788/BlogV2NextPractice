@@ -70,60 +70,60 @@ export default function NewsInfos() {
     const posts=[
         {
             image:'/images/posts/tablet1.jpg',
-            title:'لورم ایپسوم متن ساختگی ',
-            short_desc:'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است ',
+            title:'Lorem ipsum dolor sit amet, consectetur adipiscing ',
+            short_desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
             comments_number:10,
             view_number:120,
             slug:'tablet1',
-            date:'1بهمن 1500'
+            date:'1 December 2019'
         }
         ,
         {
             image:'/images/posts/tablet2.jpg',
-            title:'لورم ایپسوم متن ساختگی ',
-            short_desc:'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است ',
+            title:'Lorem ipsum dolor sit amet, consectetur adipiscing ',
+            short_desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
             comments_number:22,
             view_number:502,
             slug:'mobile1',
-            date:'1بهمن 1500'
+            date:'1 December 2019'
         }
         ,
         {
             image:'/images/posts/tablet3.jpg',
-            title:'لورم ایپسوم متن ساختگی ده از طراحان گرافیک است چاپگرها و متون بلکه ده از طراحان گرافیک است چاپگرها و متون بلکه ',
-            short_desc:'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است ',
+            title:'Lorem ipsum dolor sit amet, consectetur adipiscing',
+            short_desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
             comments_number:25,
             view_number:12004,
             slug:'tablet1',
-            date:'1بهمن 1500'
+            date:'1 December 2019'
         },
 
         {
             image:'/images/posts/tablet1.jpg',
-            title:'لورم ایپسوم متن ساختگی ',
-            short_desc:'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است ',
+            title:'Lorem ipsum dolor sit amet, consectetur adipiscing ',
+            short_desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
             comments_number:10,
             view_number:120,
             slug:'laptop1',
-            date:'1بهمن 1500'
+            date:'1 December 2019'
         },
         {
             image:'/images/posts/tablet1.jpg',
-            title:'لورم ایپسوم متن ساختگی ',
-            short_desc:'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است ',
+            title:'Lorem ipsum dolor sit amet, consectetur adipiscing ',
+            short_desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
             comments_number:10,
             view_number:120,
             slug:'laptop1',
-            date:'1بهمن 1500'
+            date:'1 December 2019'
         },
         {
             image:'/images/posts/tablet1.jpg',
-            title:'لورم ایپسوم متن ساختگی ',
-            short_desc:'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است ',
+            title:'Lorem ipsum dolor sit amet, consectetur adipiscing ',
+            short_desc:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
             comments_number:10,
             view_number:120,
             slug:'laptop1',
-            date:'1بهمن 1500'
+            date:'1 December 2019'
         },
         
     ];
@@ -132,7 +132,7 @@ export default function NewsInfos() {
     <section className="bg-zinc-100 grid grid-cols-12 p-2">
 
         <div className="col-span-4 flex flex-col gap-y-14">
-            <h3 className="font-semibold">NewestBlogs</h3>
+            <h3 className="font-semibold">MostValuedWeblogs</h3>
             {
                 blogersInfo.map((item,index)=>(
                     <MostWeblogsCard key={index} data={item}/>
