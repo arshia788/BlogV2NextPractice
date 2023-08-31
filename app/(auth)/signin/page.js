@@ -1,7 +1,9 @@
-import React from 'react'
+import SignInPage from 'components/templates/SignInPage'
 
 export default function SignIn() {
   return (
-    <div>SignIn</div>
+    <div>
+      <SignInPage />
+    </div>
   )
 }

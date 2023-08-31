@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useForm } from 'react-hook-form'
 
 
@@ -16,8 +17,17 @@ export default function SignUpPageForm() {
       phone: watch('phone'),
       password: watch('password'),
     }
+
     console.log(formatData);
 
+  }
+
+  const checkForms={
+      username: watch('username') || '',
+      displayname: watch('displayname') || '',
+      blog_name: watch('blog_name') || '',
+      phone: watch('phone') || '',
+      password: watch('password') || '',
   }
 
   return (
@@ -113,9 +123,9 @@ export default function SignUpPageForm() {
           {
             errors.phone && errors.phone.type === 'required' && (<div className='text-rose-500 '>This filed is required</div>)
             ||
-            errors.phone && errors.phone.type === 'minLength' && (<div className='text-rose-500 '>characters should be more than 6</div>)
+            errors.phone && errors.phone.type === 'minLength' && (<div className='text-rose-500 '>should be only 10 numbers!</div>)
             ||
-            errors.phone && errors.phone.type === 'maxLength' && (<div className='text-rose-500 '>characters should be less than 20</div>)
+            errors.phone && errors.phone.type === 'maxLength' && (<div className='text-rose-500 '>should be only 10 numbers!</div>)
           }
 
         </div>
@@ -144,10 +154,29 @@ export default function SignUpPageForm() {
         </div>
 
       </div>
+      
+      <p className='flex justify-center  items-center'>
+        Have An Account?
+        <Link
+        className='text-blue-700 ml-2'
+        href={'/signin'}>
+          SignIn
+        </Link>
+      </p>
 
       <button
         type='submit'
-        className='bg-blue-700 w-full p-2 rounded text-white cursor-pointer mt-3'
+        className={
+          checkForms.username.length > 0&&
+          checkForms.displayname.length > 0&&
+          checkForms.blog_name.length > 0&&
+          checkForms.phone.length > 0&&
+          checkForms.password.length > 0
+          ?
+          'bg-blue-700 hover:bg-blue-800 w-full transition-all duration-300 p-2 rounded text-white cursor-pointer mt-5'
+          :
+          'bg-blue-400 hover:bg-blue-500 w-full transition-all duration-300 p-2 rounded text-white cursor-pointer mt-5'
+        }
       >Submit</button>
 
 
