@@ -25,7 +25,6 @@ export default function HotNews() {
     ];
 
     const [activeSlides, setActiveSlides] = useState(newslist[0]);
-    console.log(activeSlides);
 
     setTimeout(()=>{
         const item= activeSlides.value;
