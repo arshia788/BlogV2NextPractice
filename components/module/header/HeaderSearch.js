@@ -1,9 +1,8 @@
 'use client';
+import { useState } from 'react';
 
 import { FiSearch } from "react-icons/fi";
 import { FiArrowRight } from "react-icons/fi";
-import { useState } from 'react';
-
 
 
 export default function HeaderSearch() {
@@ -24,19 +23,28 @@ export default function HeaderSearch() {
     return (
 
         <div className='flex justify-between items-center
-             bg-pink-100 rounded-full py-2 px-1 w-[300px] ml-12'>
+             bg-zinc-100 rounded-full py-2 px-1 w-[300px] ml-12'>
 
-            <FiSearch className='w-6 h-6 text-gray-600 mr-2' />
             <input placeholder='search...'
                 className='bg-transparent outline-none w-80 '
                 onChange={changeHandler}
             />
 
+
             <div className="w-8">
-                <FiArrowRight
-                    className={`${showArrow ? " static transition-all duration-300" : 'w-4 h-4 hidden transition-all duration-300'}`}
-                />
+
+                {
+                    showArrow ?
+
+                        <FiArrowRight
+                        className='w-5 h-5 text-gray-600 mr-2'
+                        />
+                        :
+                        <FiSearch className='w-5 h-5 text-gray-600 mr-2' />
+                }
+
             </div>
+
         </div>
     )
 }

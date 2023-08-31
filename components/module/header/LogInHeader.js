@@ -1,7 +1,8 @@
 'use client';
 
-import { IoNotificationsOutline } from 'react-icons/io5';
+import HeaderSearch from './HeaderSearch';
 
+import { IoNotificationsOutline } from 'react-icons/io5';
 import { FiMoon } from 'react-icons/fi';
 import { BsSun } from 'react-icons/bs';
 
@@ -20,8 +21,9 @@ export default function LogInHeader() {
     }
 
     return (
-        <div className='flex justify-between items-center gap-x-2  w-[240px]'>
-
+        <div className='flex justify-between items-center gap-x-2 '>
+            
+            <HeaderSearch />
             {/* signin */}
             <button className='bg-white border-none rounded px-2 py-1'>
                 <p>signUp / signIn</p>
