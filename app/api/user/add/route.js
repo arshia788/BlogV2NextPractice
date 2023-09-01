@@ -41,6 +41,20 @@ export async function POST(req){
             )
         };
 
+        // FIND UNIQUE RPOPERTIES
+        const findPhone= await User.findOne({phone})
+        if(findPhone) return NextResponse.json({status:401}, {data:"Enter another phone number!"})
+
+        const findUsername= await User.findOne({username})
+        if(findUsername) return NextResponse.json({status:401}, {data:"Enter another Username!"})
+        
+        const findBlog_name= await User.findOne({blog_name})
+        if(findBlog_name) return NextResponse.json({status:401}, {data:"Enter another Blog_name!"})
+        
+
+
+        
+
     } catch (error) {
         return NextResponse.json({status:401})
     }
