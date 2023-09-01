@@ -22,12 +22,12 @@ export default function SignUpPageForm() {
 
   }
 
-  const checkForms={
-      username: watch('username') || '',
-      displayname: watch('displayname') || '',
-      blog_name: watch('blog_name') || '',
-      phone: watch('phone') || '',
-      password: watch('password') || '',
+  const checkForms = {
+    username: watch('username') || '',
+    displayname: watch('displayname') || '',
+    blog_name: watch('blog_name') || '',
+    phone: watch('phone') || '',
+    password: watch('password') || '',
   }
 
   return (
@@ -48,15 +48,15 @@ export default function SignUpPageForm() {
             className="rounded w-full shadow-[0px_10px_5px_rgba(0,0,0,0.45)] outline-none p-2 border focus:border-dashed focus:border-pink-500"
             {...register('username', {
               required: true,
-              minLength: 10,
-              maxLength: 10
+              minLength: 8,
+              maxLength: 20
             })}
           />
 
           {
             errors.username && errors.username.type === 'required' && (<div className='text-rose-500 '>This filed is required</div>)
             ||
-            errors.username && errors.username.type === 'minLength' && (<div className='text-rose-500 '>characters should be more than 6</div>)
+            errors.username && errors.username.type === 'minLength' && (<div className='text-rose-500 '>characters should be more than 8</div>)
             ||
             errors.username && errors.username.type === 'maxLength' && (<div className='text-rose-500 '>characters should be less than 20</div>)
           }
@@ -84,6 +84,7 @@ export default function SignUpPageForm() {
 
         </div>
 
+        {/* blog_name */}
         <div className='h-[80px] min-h-[80px] flex flex-col gap-y-3'>
 
           <input type="text"
@@ -107,6 +108,7 @@ export default function SignUpPageForm() {
 
         </div>
 
+        {/* phone */}
         <div className='h-[80px] min-h-[80px] flex flex-col gap-y-3'>
 
           <input type="text"
@@ -130,6 +132,7 @@ export default function SignUpPageForm() {
 
         </div>
 
+        {/* password */}
         <div className='h-[80px] min-h-[80px] flex flex-col gap-y-3'>
 
           <input type="password"
@@ -154,12 +157,12 @@ export default function SignUpPageForm() {
         </div>
 
       </div>
-      
+
       <p className='flex justify-center  items-center'>
         Have An Account?
         <Link
-        className='text-blue-700 ml-2'
-        href={'/signin'}>
+          className='text-blue-700 ml-2'
+          href={'/signin'}>
           SignIn
         </Link>
       </p>
@@ -167,15 +170,15 @@ export default function SignUpPageForm() {
       <button
         type='submit'
         className={
-          checkForms.username.length > 0&&
-          checkForms.displayname.length > 0&&
-          checkForms.blog_name.length > 0&&
-          checkForms.phone.length > 0&&
-          checkForms.password.length > 0
-          ?
-          'bg-blue-700 hover:bg-blue-800 w-full transition-all duration-300 p-2 rounded text-white cursor-pointer mt-5'
-          :
-          'bg-blue-400 hover:bg-blue-500 w-full transition-all duration-300 p-2 rounded text-white cursor-pointer mt-5'
+          checkForms.username.length > 0 &&
+            checkForms.displayname.length > 0 &&
+            checkForms.blog_name.length > 0 &&
+            checkForms.phone.length > 0 &&
+            checkForms.password.length > 0
+            ?
+            'bg-blue-700 hover:bg-blue-800 w-full transition-all duration-300 p-2 rounded text-white cursor-pointer mt-5'
+            :
+            'bg-blue-400 hover:bg-blue-500 w-full transition-all duration-300 p-2 rounded text-white cursor-pointer mt-5'
         }
       >Submit</button>
 
