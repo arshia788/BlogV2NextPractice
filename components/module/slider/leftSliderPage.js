@@ -68,7 +68,7 @@ export default function LeftSliderPage() {
         <ImageSlider data={activeSlide} activeSlide={activeSlide} />
       </div>
 
-      <div className='absolute right-10 bottom-5 h-full flex flex-col justify-center gap-y-4 '>
+      <div className='absolute right-10 bottom-5 h-full flex flex-col justify-center gap-y-4'> 
 
         {
           posts.map((item,index)=>(
