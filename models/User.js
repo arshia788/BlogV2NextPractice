@@ -28,7 +28,7 @@ const userSchema= new Schema({
         required:true
     },
 
-    image:{
+    default_image:{
         type:String,
         required:true
     }
@@ -42,6 +42,12 @@ const userSchema= new Schema({
     active_code:{
         type:Number,
         required:true
+    },
+
+    active_code_number:{
+        type:Number,
+        required:true,
+        default:5
     },
     user_is_active:{
         type:Boolean,
@@ -75,6 +81,7 @@ const userSchema= new Schema({
         required:true,
         default:[]
     },
+    
     token:{
         type:String,
         required:true,

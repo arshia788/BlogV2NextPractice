@@ -1,7 +1,10 @@
 import User from "models/User";
 import { NextResponse } from "next/server";
+import { hashPassword } from "utils/auth";
 import connectDB from "utils/connectDB";
 
+import  Jwt  from "jsonwebtoken";
+import {cookies} from 'next/headers'
 
 export async function POST(req){
     try {
@@ -43,16 +46,93 @@ export async function POST(req){
 
         // FIND UNIQUE RPOPERTIES
         const findPhone= await User.findOne({phone})
-        if(findPhone) return NextResponse.json({status:401}, {data:"Enter another phone number!"})
+        if(findPhone) return NextResponse.json({status:402}, {data:"Enter another phone number!"})
 
         const findUsername= await User.findOne({username})
-        if(findUsername) return NextResponse.json({status:401}, {data:"Enter another Username!"})
+        if(findUsername) return NextResponse.json({status:402}, {data:"Enter another Username!"})
         
         const findBlog_name= await User.findOne({blog_name})
-        if(findBlog_name) return NextResponse.json({status:401}, {data:"Enter another Blog_name!"})
+        if(findBlog_name) return NextResponse.json({status:402}, {data:"Enter another Blog_name!"})
         
+        
+        // CONVER PASSWORD & USERNAME. 
+        const newUsername= inputData.username.replace(/\s+/g,'-').toLowerCase();
+        const newPassword= inputData.password.replace(/\s+/g,'').toLowerCase();
+
+        function generateRandoNumber(n){
+            return Math.floor(Math.pow(10, n-1) + (Math.random()* 9* Math.pow(10, n-1)))
+        }
+
+        const active_code= generateRandoNumber(6);
 
 
+        // hash
+        const hashedPassword= await hashPassword(newPassword);
+
+        const userFullData={
+
+            blog_name:inputData.blog_name,
+            username:newUsername,
+            display_name:inputData.display_name,
+            password:hashedPassword,
+            phone:inputData.phone,
+            createdAt: "1403/3/3" ,
+
+            // baray in gofti newUsername ta baid bar asas har name axe ha ro avaz bokoneh. 
+            default_image:`https://avatars.dicebear.com/api/bottts/${newUsername}.svg`,
+
+            // kasi ke signup kardan 3 hast 
+            // onai ke signup nakardan 4 hastan 
+
+            role:3,
+            active_code:active_code,
+            active_code_number:5,
+            user_is_active:false,
+            // in ro mizari false ta admin biad motavageh besheh ke aya karbar jadidi be site omadeh ya na.
+
+            viewed:false,
+            liked_posts:[],
+            bookmarked_posts:[],
+            followings:[],
+            notifications:[],
+            token:"",
+        };
+
+        // CREATE USER 
+
+        const createdUserData= await User.create(userFullData);
+
+        
+        // token ro sakhti 
+        const createdToken= Jwt.sign({_id:createdUserData._id, username:createdUserData.name}, process.env.SECRET_TOKEN);
+
+        const userToken={
+            token:createdToken
+        };
+
+        // * Adding token to user model.
+
+        // omadi token ro dadi be on model 
+        await User.findByIdAndUpdate({_id:createdUserData._id, userToken},{new:true});
+
+
+        // daghigan mesle cookie hast ama inja to dari az next/headers estefadeh mikoni. 
+
+        const cookieStore= cookies();
+        cookieStore.set('token', createdToken);
+
+        // in ro dari mifresti ta to client biay set bokoini in ha ro  dar redux. 
+        const send_data={
+            userloged:true,
+            role:3,
+            user_is_active:false
+        }
+
+
+        return NextResponse.json(
+            {data:send_data, message:"User created"},
+            {status:201}
+        )
         
 
     } catch (error) {
