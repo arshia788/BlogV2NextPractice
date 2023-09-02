@@ -7,6 +7,7 @@ import { FiMoon } from 'react-icons/fi';
 import { BsSun } from 'react-icons/bs';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function LogInHeader() {
 
@@ -25,9 +26,9 @@ export default function LogInHeader() {
             
             <HeaderSearch />
             {/* signin */}
-            <button className='bg-white border-none rounded px-2 py-1'>
+            <Link href={'/signup'} className='bg-white border-none rounded px-2 py-1'>
                 <p>signUp / signIn</p>
-            </button>
+            </Link>
 
             {/* notif */}
             <div className='relative'>

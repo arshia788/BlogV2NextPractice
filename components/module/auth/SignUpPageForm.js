@@ -10,24 +10,27 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // redux
-import {useSelector, useDispatch} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux';
 
 // actions-redux
 import { checkingLogged } from 'redux/feaures/logeedSlice';
 import { setRoleValue } from 'redux/feaures/roleSlice';
-import { useEffect } from 'react';
+
 
 export default function SignUpPageForm() {
 
-  const router= useRouter()
+
+  const router= useRouter();
   const dispatch= useDispatch();
 
   const Logged= useSelector(store=> store.logeedSlice.value);
   const role= useSelector(store=> store.roleSlice.value);
+  console.log(Logged);
 
 
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
 
   const signUper = () => {
 
@@ -38,9 +41,6 @@ export default function SignUpPageForm() {
       phone: watch('phone'),
       password: watch('password'),
     }
-
-    axios.post('/api/user/add', formatData)
-
     toast.info('please wait...', {
       position: "top-right",
       autoClose: 3000,
@@ -55,16 +55,20 @@ export default function SignUpPageForm() {
       progress: undefined,
     })
     
-      .then(data => {
+    axios.post('/api/user/add', formatData)
+
+    
+    .then(data => {
 
 
-
+      console.log(data.data);
+      
         if (data.data.data.userImage) {
 
           dispatch(setRoleValue(3))
           dispatch(checkingLogged(true))
 
-          toast.success(data.data.message, {
+          toast.success(data.data.data.message, {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,

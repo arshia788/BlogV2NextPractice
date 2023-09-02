@@ -1,4 +1,5 @@
 import User from "models/User";
+
 import { NextResponse } from "next/server";
 import { hashPassword } from "utils/auth";
 import connectDB from "utils/connectDB";
@@ -56,8 +57,9 @@ export async function POST(req){
         if(findBlog_name) return NextResponse.json({status:402,data:"Enter another Blog_name!"})
         
         
-        // CONVER PASSWORD & USERNAME. 
+        // CONVERT PASSWORD & USERNAME. 
         const newUsername= username.replace(/\s+/g,'-').toLowerCase();
+
         const newPassword= password.replace(/\s+/g,'').toLowerCase();
 
         function generateRandoNumber(n){
@@ -70,6 +72,8 @@ export async function POST(req){
         // hash
         const hashedPassword= await hashPassword(newPassword);
 
+        const date= new Date();
+        
         const userFullData={
 
             blog_name:blog_name,
@@ -77,7 +81,7 @@ export async function POST(req){
             displayname:displayname,
             password:hashedPassword,
             phone:phone,
-            createdAt: "1403/3/3" ,
+            createdAt: date.toLocaleDateString("fa-IR",{year:"numeric", month:'long', day:'numeric'}),
 
             // baray in gofti newUsername ta baid bar asas har name axe ha ro avaz bokoneh. 
             default_image:`https://avatars.dicebear.com/api/bottts/${newUsername}.svg`,
@@ -105,20 +109,19 @@ export async function POST(req){
 
         
         // token ro sakhti 
-        const createdToken= Jwt.sign({_id:createdUserData._id, username:createdUserData.name}, process.env.TOKEN_SECRET);
+        const createdToken= Jwt.sign({_id:createdUserData._id, username:createdUserData.username}, process.env.TOKEN_SECRET);
 
-        const userToken={
+        const userToken= {
             token:createdToken
         };
 
-        // * Adding token to user model.
-
-        await User.findByIdAndUpdate(createdUserData._id,userToken ,{new:true});
-        
+        await User.findByIdAndUpdate(createdUserData._id, userToken, {new:true});
 
 
+        // SETTING TOKEIN IN COOKIE
         const cookieStore= cookies();
-        cookieStore.set('token', createdToken);
+        cookieStore.set("token", createdToken, {"SameSite":'None'} );
+
 
         const send_data={
             userloged:true,
@@ -130,8 +133,10 @@ export async function POST(req){
 
 
         return NextResponse.json(
-            {data:send_data, message:"User created"},
-            {status:201}
+            {data:send_data},
+            {status:201},
+            {message:'user created'},
+            
         )
         
 
