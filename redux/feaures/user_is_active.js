@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState={
+    value:false
+}
 
 const userIsActiveSlice= createSlice({
     name:'userIsActive',
-    initialState:false,
+    initialState,
     reducers:{
-        userIsActiveToFalse:(state,action)=>{state=false},
-        userIsActiveToTrue:(state,action)=>{state=true},
+        userIsActiveToFalse:(state,action)=>{state.value=false},
+        userIsActiveToTrue:(state,action)=>{state.value=true},
     }
 })
 

@@ -113,21 +113,19 @@ export async function POST(req){
 
         // * Adding token to user model.
 
-        // omadi token ro dadi be on model 
-        await User.findByIdAndUpdate({_id:createdUserData._id, userToken},{new:true});
+        await User.findByIdAndUpdate(createdUserData._id,userToken ,{new:true});
+        
 
-
-        // daghigan mesle cookie hast ama inja to dari az next/headers estefadeh mikoni. 
 
         const cookieStore= cookies();
         cookieStore.set('token', createdToken);
 
-        // in ro dari mifresti ta to client biay set bokoini in ha ro  dar redux. 
         const send_data={
             userloged:true,
             role:3,
             user_is_active:false,
-            userImage:userFullData.default_image
+            userImage:userFullData.default_image,
+            blog_slug:userFullData.username
         }
 
 

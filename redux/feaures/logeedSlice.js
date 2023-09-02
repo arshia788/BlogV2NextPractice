@@ -1,15 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState={
+    value:false
+}
 
 const loggedSlice=createSlice({
     name:'logged',
-    initialState:false,
+    initialState,
     reducers:{
-        loggedToFalse:(state)=>{state=false},
-        loggedToTrue:(state)=>{state=true},
+        checkingLogged:(state,action)=>{
+            state.value = action.payload
+        }
     }
 });
 
+console.log(initialState.value);
 
-export const {loggedToFalse, loggedToTrue}= loggedSlice.actions;
+
+export const {checkingLogged}= loggedSlice.actions;
 export default loggedSlice.reducer

@@ -1,15 +1,31 @@
 'use client';
 
-import { data } from 'autoprefixer';
 import axios from 'axios';
 import Link from 'next/link';
-import { useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
+// toast
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// redux
+import {useSelector, useDispatch} from 'react-redux'
+
+// actions-redux
+import { checkingLogged } from 'redux/feaures/logeedSlice';
+import { setRoleValue } from 'redux/feaures/roleSlice';
+import { useEffect } from 'react';
 
 export default function SignUpPageForm() {
+
+  const router= useRouter()
+  const dispatch= useDispatch();
+
+  const Logged= useSelector(store=> store.logeedSlice.value);
+  const role= useSelector(store=> store.roleSlice.value);
+
+
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
@@ -24,11 +40,30 @@ export default function SignUpPageForm() {
     }
 
     axios.post('/api/user/add', formatData)
-      .then(data => {
-        
-        console.log(data.data.message);
 
-        if (data.data.data) {
+    toast.info('please wait...', {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+
+      closeOnClick: true,
+
+      pauseOnHover: true,
+
+      draggable: true,
+
+      progress: undefined,
+    })
+    
+      .then(data => {
+
+
+
+        if (data.data.data.userImage) {
+
+          dispatch(setRoleValue(3))
+          dispatch(checkingLogged(true))
+
           toast.success(data.data.message, {
             position: "top-right",
             autoClose: 3000,
@@ -42,7 +77,10 @@ export default function SignUpPageForm() {
 
             progress: undefined,
           })
+
         }
+
+
         else{
           toast.error(data.data.data, {
             position: "top-right",

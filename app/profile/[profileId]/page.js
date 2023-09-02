@@ -73,6 +73,7 @@ export default function ProfileDetail() {
     }
     return (
         <div className='flex flex-col gap-y-8'>
+            
             <section className='flex flex-col gap-4 items-center mt-4'>
 
                 <div className='relative w-[130px] h-[130px] rounded-full overflow-hidden'>
