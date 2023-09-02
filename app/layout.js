@@ -11,17 +11,17 @@ export const metadata = {
 }
 
 // Providers
-import storeProvider from 'providers/storeProvider';
+import StoreProvider from 'providers/storeProvider';
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <storeProvider>
+        <StoreProvider>
           <Layout>
             {children}
           </Layout>
-        </storeProvider>
+        </StoreProvider>
       </body>
     </html>
   )

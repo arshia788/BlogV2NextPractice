@@ -11,7 +11,7 @@ const userSchema= new Schema({
         type:String,
         required:true
     },
-    display_name:{
+    displayname:{
         type:String,
         required:true
     },
@@ -84,7 +84,7 @@ const userSchema= new Schema({
     
     token:{
         type:String,
-        required:true,
+        // required:true,
     },
 
 
