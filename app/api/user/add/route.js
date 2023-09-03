@@ -1,19 +1,19 @@
-import User from "models/User";
+import connectDB from "utils/connectDB";
 
+import User from "models/User";
 import { NextResponse } from "next/server";
 import { hashPassword } from "utils/auth";
-import connectDB from "utils/connectDB";
 
 import  Jwt  from "jsonwebtoken";
 import {cookies} from 'next/headers'
+import bcrypt from 'bcrypt';
+
 
 export async function POST(req){
     try {
-        // console.log('adoiadw');
         await connectDB()
 
         const body= await req.json();
-        console.log(body);
         const {username, displayname, blog_name, phone, password}= body;
 
         if(username.length <8 || username.length >20){
@@ -54,7 +54,7 @@ export async function POST(req){
         if(findUsername) return NextResponse.json({status:402,data:"Enter another Username!"})
         
         const findBlog_name= await User.findOne({blog_name})
-        if(findBlog_name) return NextResponse.json({status:402,data:"Enter another Blog_name!"})
+        if(findBlog_name) return NextResponse.json({status:402},{data:"Enter another Blog_name!"})
         
         
         // CONVERT PASSWORD & USERNAME. 
@@ -70,7 +70,7 @@ export async function POST(req){
 
 
         // hash
-        const hashedPassword= await hashPassword(newPassword);
+        const hashedPassword= await bcrypt.hash(newPassword, 13);
 
         const date= new Date();
         
@@ -141,7 +141,6 @@ export async function POST(req){
         
 
     } catch (error) {
-        console.log(error);
         return NextResponse.json({status:401, message:"Failed to create a user"})
     }
 }

@@ -15,6 +15,8 @@ import {useSelector, useDispatch} from 'react-redux';
 // actions-redux
 import { checkingLogged } from 'redux/feaures/logeedSlice';
 import { setRoleValue } from 'redux/feaures/roleSlice';
+import { setUserImageSlice } from 'redux/feaures/userImageSlice';
+import { useEffect, useState } from 'react';
 
 
 export default function SignUpPageForm() {
@@ -25,7 +27,14 @@ export default function SignUpPageForm() {
 
   const Logged= useSelector(store=> store.logeedSlice.value);
   const role= useSelector(store=> store.roleSlice.value);
-  console.log(Logged);
+
+  const [userBlog, setUserBlog]= useState('');
+
+  useEffect(()=>{
+    if(userBlog) router.push(`/profile/${userBlog}`)
+  },[userBlog])
+
+
 
 
 
@@ -60,15 +69,15 @@ export default function SignUpPageForm() {
     
     .then(data => {
 
-
-      console.log(data.data);
       
         if (data.data.data.userImage) {
 
           dispatch(setRoleValue(3))
           dispatch(checkingLogged(true))
+          dispatch(setUserImageSlice(data.data.data.userImage))
+          setUserBlog(data.data.data.blog_slug)
 
-          toast.success(data.data.data.message, {
+          toast.success("User created!", {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,

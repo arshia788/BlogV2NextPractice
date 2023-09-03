@@ -15,7 +15,6 @@ export default function SignInPageForm() {
       password: watch('password'),
     }
 
-    console.log(formatData);
 
   }
 

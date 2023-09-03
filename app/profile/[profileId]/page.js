@@ -77,7 +77,7 @@ export default function ProfileDetail() {
             <section className='flex flex-col gap-4 items-center mt-4'>
 
                 <div className='relative w-[130px] h-[130px] rounded-full overflow-hidden'>
-                    <Image src={data.image} fill alt={data.title} className='object-cover'/>
+                    <Image src={data.image} fill sizes='100' alt={data.title} className='object-cover'/>
                 </div>
 
                 <p>{data.name}</p>

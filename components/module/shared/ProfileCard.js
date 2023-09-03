@@ -8,7 +8,7 @@ export default function ProfileCard({data}) {
         
         {/* image left */}
         <div className="relative w-[300px] min-w-[300px] h-[180px] rounded overflow-hidden "> 
-            <Image src={data.image} alt={data.title} fill className="object-cover"/>
+            <Image src={data.image} alt={data.title} fill className="object-cover" sizes="100"/>
         </div>
 
         {/* info right. */}
