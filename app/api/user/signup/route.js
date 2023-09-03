@@ -83,18 +83,13 @@ export async function POST(req){
             phone:phone,
             createdAt: date.toLocaleDateString("fa-IR",{year:"numeric", month:'long', day:'numeric'}),
 
-            // baray in gofti newUsername ta baid bar asas har name axe ha ro avaz bokoneh. 
             default_image:`https://avatars.dicebear.com/api/bottts/${newUsername}.svg`,
 
-            // kasi ke signup kardan 3 hast 
-            // onai ke signup nakardan 4 hastan 
 
             role:3,
             active_code:active_code,
             active_code_number:5,
             user_is_active:false,
-            // in ro mizari false ta admin biad motavageh besheh ke aya karbar jadidi be site omadeh ya na.
-
             viewed:false,
             liked_posts:[],
             bookmarked_posts:[],
@@ -120,7 +115,7 @@ export async function POST(req){
 
         // SETTING TOKEIN IN COOKIE
         const cookieStore= cookies();
-        cookieStore.set("token", createdToken, {"SameSite":'None'} );
+        cookieStore.set("token", createdToken, {maxAge:60*60* 24* 60} );
 
 
         const send_data={

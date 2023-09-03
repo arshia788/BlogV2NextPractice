@@ -24,14 +24,10 @@ export default function SignUpPageForm() {
 
   const router= useRouter();
   const dispatch= useDispatch();
-
-  const Logged= useSelector(store=> store.logeedSlice.value);
-  const role= useSelector(store=> store.roleSlice.value);
-
   const [userBlog, setUserBlog]= useState('');
 
   useEffect(()=>{
-    if(userBlog) router.push(`/profile/${userBlog}`)
+    if(userBlog) router.push(`/profile/signup/${userBlog}`)
   },[userBlog])
 
 
