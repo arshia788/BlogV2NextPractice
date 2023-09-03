@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // redux
-import {useSelector, useDispatch} from 'react-redux';
+import { useDispatch} from 'react-redux';
 
 // actions-redux
 import { checkingLogged } from 'redux/feaures/logeedSlice';
@@ -60,12 +60,12 @@ export default function SignUpPageForm() {
       progress: undefined,
     })
     
-    axios.post('/api/user/add', formatData)
+    axios.post('/api/user/signup', formatData)
 
     
     .then(data => {
 
-      
+        console.log(data.data.data);
         if (data.data.data.userImage) {
 
           dispatch(setRoleValue(3))

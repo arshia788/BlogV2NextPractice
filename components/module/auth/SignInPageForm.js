@@ -8,10 +8,18 @@ import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// redux
+import { useDispatch } from 'react-redux';
+
+// redux--actions
+import { setUserImageSlice } from 'redux/feaures/userImageSlice';
+import { setRoleValue } from 'redux/feaures/roleSlice';
+import { checkingLogged } from 'redux/feaures/logeedSlice';
 
 export default function SignInPageForm() {
 
   const router = useRouter();
+  const dispatch= useDispatch();
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
@@ -30,11 +38,15 @@ export default function SignInPageForm() {
     const data = await res.json()
     console.log(data.data);
 
-    if (data.status === 200) {
-      router.push('/')
-      toast.success("You have logged", {
-        position:'top-right'
-      })
+    if (data.data.userImage) {
+      
+
+      dispatch(setUserImageSlice(data.data.userImage))
+
+      dispatch(setRoleValue(data.data.role))
+      dispatch(checkingLogged(data.data.logged))
+
+      // router.push('/')
     } else {
       toast.error(data.data, {
         position:'top-right'

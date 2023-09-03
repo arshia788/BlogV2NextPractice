@@ -105,6 +105,7 @@ export async function POST(req){
         
         // token ro sakhti 
         const createdToken= Jwt.sign({_id:createdUserData._id, username:createdUserData.username}, process.env.TOKEN_SECRET);
+        
 
         const userToken= {
             token:createdToken
@@ -115,8 +116,7 @@ export async function POST(req){
 
         // SETTING TOKEIN IN COOKIE
         const cookieStore= cookies();
-        cookieStore.set("token", createdToken, {maxAge:60*60* 24* 60} );
-
+        cookieStore.set("token", createdToken, {maxAge:60 * 60 * 24* 60});
 
         const send_data={
             userloged:true,

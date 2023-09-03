@@ -12,6 +12,6 @@ const UserImageSlice= createSlice({
 })
 
 export const {setUserImageSlice}= UserImageSlice.actions;
-export default  UserImageSlice.reducer;
+export default UserImageSlice.reducer;
 
 
