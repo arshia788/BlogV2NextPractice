@@ -22,9 +22,10 @@ export default function LogInHeader({data}) {
 
     const dispatch= useDispatch();
 
-    dispatch(setUserImageSlice(data.data.user_image));
-    dispatch(setRoleValue(data.data.role));
-    {data.data.loged ?dispatch(checkingLogged(data.data.loged)) :null};
+    
+    dispatch(setUserImageSlice(data?.data.user_image));
+    dispatch(setRoleValue(data?.data.role));
+    {data?.data.loged ?dispatch(checkingLogged(data?.data.loged)) :null};
 
 
 

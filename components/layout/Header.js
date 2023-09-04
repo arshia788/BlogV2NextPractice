@@ -5,24 +5,22 @@ import LogInHeader from 'components/module/header/LogInHeader';
 
 
 const getData= async(token)=>{
-    const data= await fetch(`${process.env.SERVER_URL}/api/user/checkToken`,{cache:'no-store', headers:{token}});
-    return data.json()
+
+    if(token){
+        const data= await fetch(`${process.env.SERVER_URL}/api/user/checkToken`,{cache:'no-store', headers:{token}});
+        return data.json()        
+    }
+    
 }
 
 
 export default async function Header() {
 
     const cookieStore = cookies();
-
-    const token= cookieStore.get('token') ? cookieStore.get('token').value :undefined
-
-    console.log('token-----',token);
-
-    const data= await getData(token);
-
-    console.log(data);
-
+    const token= cookieStore.get('token') ? cookieStore.get('token').value :null;
     
+    const data= await getData(token);
+    console.log(data);
 
 
     return (
@@ -32,7 +30,7 @@ export default async function Header() {
                 <Image src={'/logo.svg'} width={40} height={40} alt='logo'/>
             </Link>
 
-            <LogInHeader data={data}/>
+            {data ?<LogInHeader data={data}/> :  <LogInHeader />}
 
         </header>
     )
