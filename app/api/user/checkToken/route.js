@@ -23,7 +23,6 @@ export async function GET(req) {
         const verified = Jwt.verify(token, process.env.TOKEN_SECRET)
 
         const userFullData = await User.findById(verified._id);
-        console.log(userFullData);
 
         send_data = {
             loged: true,

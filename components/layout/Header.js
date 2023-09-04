@@ -20,7 +20,6 @@ export default async function Header() {
     const token= cookieStore.get('token') ? cookieStore.get('token').value :null;
     
     const data= await getData(token);
-    console.log(data);
 
 
     return (
