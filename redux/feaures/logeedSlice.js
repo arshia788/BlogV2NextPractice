@@ -14,7 +14,6 @@ const loggedSlice=createSlice({
     }
 });
 
-console.log(initialState.value);
 
 
 export const {checkingLogged}= loggedSlice.actions;

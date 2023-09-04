@@ -65,7 +65,6 @@ export default function SignUpPageForm() {
     
     .then(data => {
 
-        console.log(data.data.data);
         if (data.data.data.userImage) {
 
           dispatch(setRoleValue(3))

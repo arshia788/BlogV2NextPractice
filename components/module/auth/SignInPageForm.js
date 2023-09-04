@@ -36,17 +36,15 @@ export default function SignInPageForm() {
       headers: { "Content-Type": 'application/json' }
     })
     const data = await res.json()
-    console.log(data.data);
 
     if (data.data.userImage) {
       
-
       dispatch(setUserImageSlice(data.data.userImage))
-
       dispatch(setRoleValue(data.data.role))
       dispatch(checkingLogged(data.data.logged))
 
-      // router.push('/')
+      router.push('/')
+
     } else {
       toast.error(data.data, {
         position:'top-right'

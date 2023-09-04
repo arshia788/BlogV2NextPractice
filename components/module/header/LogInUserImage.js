@@ -11,7 +11,6 @@ import userImageSlice from "redux/feaures/userImageSlice";
 export default function LogInUserImage() {
 
   const userImage= useSelector(store=> store.userImageSlice.value);
-  console.log(userImage);            
 
   return (
     <div>

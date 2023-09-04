@@ -41,9 +41,7 @@ export async function POST(req){
         if(!checkPassword) return NextResponse.json({data:"Password is wrong."});
 
 
-        const createdToken= {
-            token:userFullData.token
-        };
+        const createdToken= userFullData.token;
 
 
 
@@ -54,7 +52,7 @@ export async function POST(req){
 
         const send_data={
             role:userFullData.role,
-            user_is_active:false,
+            user_is_active:userFullData.user_is_active,
             userImage:userFullData.default_image,
             blog_slug:userFullData.username
         }

@@ -1,15 +1,33 @@
 'use client';
 
 import HeaderSearch from './HeaderSearch';
+import LogInUserImage from './LogInUserImage';
 
+// icons--
 import { IoNotificationsOutline } from 'react-icons/io5';
-
 import { FiMoon } from 'react-icons/fi';
 import { BsSun } from 'react-icons/bs';
 
-import LogInUserImage from './LogInUserImage';
+// redux--
+import { useDispatch } from 'react-redux';
 
-export default function LogInHeader() {
+// redux-actions---
+import { setUserImageSlice } from 'redux/feaures/userImageSlice';
+import { setRoleValue } from 'redux/feaures/roleSlice';
+import { checkingLogged } from 'redux/feaures/logeedSlice';
+import { userIsActiveToTrue } from 'redux/feaures/user_is_active';
+
+
+export default function LogInHeader({data}) {
+
+    const dispatch= useDispatch();
+
+    dispatch(setUserImageSlice(data.data.user_image));
+    dispatch(setRoleValue(data.data.role));
+    {data.data.loged ?dispatch(checkingLogged(data.data.loged)) :null};
+
+
+
 
 
     return (

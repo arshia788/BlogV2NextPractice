@@ -1,15 +1,28 @@
-import LogInHeader from 'components/module/header/LogInHeader';
 import Image from 'next/image';
 import Link from 'next/link';
-
 import { cookies } from 'next/headers';
+import LogInHeader from 'components/module/header/LogInHeader';
+
+
+const getData= async(token)=>{
+    const data= await fetch(`${process.env.SERVER_URL}/api/user/checkToken`,{cache:'no-store', headers:{token}});
+    return data.json()
+}
+
 
 export default async function Header() {
 
-    const cookieStore= cookies();
-    const token= cookieStore.get('token') ? cookieStore.get('token').value : undefined;
+    const cookieStore = cookies();
+
+    const token= cookieStore.get('token') ? cookieStore.get('token').value :undefined
+
+    console.log('token-----',token);
+
+    const data= await getData(token);
+
+    console.log(data);
+
     
-    console.log(token);
 
 
     return (
@@ -19,7 +32,8 @@ export default async function Header() {
                 <Image src={'/logo.svg'} width={40} height={40} alt='logo'/>
             </Link>
 
-            <LogInHeader />
+            <LogInHeader data={data}/>
+
         </header>
     )
 }
