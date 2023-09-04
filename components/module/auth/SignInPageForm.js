@@ -42,6 +42,7 @@ export default function SignInPageForm() {
       dispatch(setUserImageSlice(data.data.userImage))
       dispatch(setRoleValue(data.data.role))
       dispatch(checkingLogged(data.data.logged))
+      toast.success("You have logged");
 
       router.push('/')
 

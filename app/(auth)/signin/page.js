@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 export default async function SignIn() {
 
   const cookieStore= cookies(); 
-  const token= cookieStore.get('token').value;
+  const token= cookieStore.get('token') ? cookieStore.get('token').value :null;
 
   if(token){
     redirect('/')

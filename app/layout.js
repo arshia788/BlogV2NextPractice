@@ -13,17 +13,20 @@ export const metadata = {
 
 // Providers
 import StoreProvider from 'providers/StoreProvider';
+import ToastProvider from 'providers/ToastProvider';
 
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <StoreProvider>
-          <Layout>
-            {children}
-          </Layout>
-        </StoreProvider>
+        <ToastProvider>
+          <StoreProvider>
+            <Layout>
+              {children}
+            </Layout>
+          </StoreProvider>
+        </ToastProvider>
       </body>
     </html>
   )
