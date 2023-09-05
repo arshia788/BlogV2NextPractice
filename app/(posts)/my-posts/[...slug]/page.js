@@ -23,13 +23,13 @@ export default function Posts({params}) {
 
   useEffect(()=>{
 
-    // ? fixed the routes so that now you can't give any url at the slug route...
 
     console.log(route);
+
+    if(route !== "all" && route !== "drafts" && route !== "published" &&route !== "waiting" && route !== "liked" && route !== "bookmarked"){
       
-    // if(route !== "all" || route !== "drafts" || route !== "published" ||route !== "waiting" || route !== "liked" || route !== "bookmarked"){
-    //     router.push('/my-posts/all')
-    // }
+      router.push('/my-posts/all')
+    }
 
     if(route==='all') setCheckRoute(<MyAllPosts/>);
     else if(route === 'drafts') setCheckRoute(<MyDrafts />);
