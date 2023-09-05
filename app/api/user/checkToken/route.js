@@ -19,16 +19,12 @@ export async function GET(req) {
 
 
         const token = req.headers.get("token");
-        console.log('api----',token);
 
         const verified =  Jwt.verify(token, process.env.TOKEN_SECRET)
 
-        console.log('verified-----',verified);
-        console.log('adsoadnso');
 
 
         const userFullData = await User.findById(verified._id);
-        console.log(userFullData);
 
         send_data = {
             loged: true,

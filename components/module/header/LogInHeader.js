@@ -20,7 +20,6 @@ import { userIsActiveToTrue } from 'redux/feaures/user_is_active';
 
 export default function LogInHeader({data}) {
 
-    console.log(data);
     
     const dispatch= useDispatch();
 
