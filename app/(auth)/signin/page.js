@@ -1,4 +1,4 @@
-import SignInPage from 'components/templates/SignInPage'
+import SignInPage from 'components/templates/(auth)/SignInPage'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation';
 
