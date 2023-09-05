@@ -16,12 +16,12 @@ export async function GET(req) {
 
     try {
         connectDB()
-
-
         const token = req.headers.get("token");
 
-        const verified =  Jwt.verify(token, process.env.TOKEN_SECRET)
+        const x= process.env.TOKEN_SECRET
 
+        const verified =  Jwt.verify(token, process.env.TOKEN_SECRET)
+        console.log('-------------', verified);
 
 
         const userFullData = await User.findById(verified._id);
@@ -39,7 +39,7 @@ export async function GET(req) {
     } 
     catch (error) {
 
-        console.log(error);
+        // console.log(error);
         return NextResponse.json({ data: "failed to connect" }, { status: 200 });
 
     }

@@ -23,9 +23,6 @@ export default function Posts({params}) {
 
   useEffect(()=>{
 
-
-    console.log(route);
-
     if(route !== "all" && route !== "drafts" && route !== "published" &&route !== "waiting" && route !== "liked" && route !== "bookmarked"){
       
       router.push('/my-posts/all')

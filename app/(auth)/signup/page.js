@@ -1,6 +1,6 @@
-import SignUpPage from 'components/templates/SignUpPage';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import SignUpPage from 'components/templates/(auth)/SignUpPage';
 
 export default function SignUp() {
 
