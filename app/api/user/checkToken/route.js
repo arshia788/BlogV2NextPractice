@@ -19,10 +19,16 @@ export async function GET(req) {
 
 
         const token = req.headers.get("token");
+        console.log('api----',token);
 
-        const verified = Jwt.verify(token, process.env.TOKEN_SECRET)
+        const verified =  Jwt.verify(token, process.env.TOKEN_SECRET)
+
+        console.log('verified-----',verified);
+        console.log('adsoadnso');
+
 
         const userFullData = await User.findById(verified._id);
+        console.log(userFullData);
 
         send_data = {
             loged: true,
@@ -36,8 +42,9 @@ export async function GET(req) {
 
     } 
     catch (error) {
+
         console.log(error);
-        return NextResponse.json({ data: "failed to connect" }, { status: 401 });
+        return NextResponse.json({ data: "failed to connect" }, { status: 200 });
 
     }
 

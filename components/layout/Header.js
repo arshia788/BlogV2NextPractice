@@ -17,8 +17,8 @@ const getData= async(token)=>{
 export default async function Header() {
 
     const cookieStore = cookies();
-    const token= cookieStore.get('token') ? cookieStore.get('token').value :null;
-    
+    const token= cookieStore.get('token') ? cookieStore.get('token').value :undefined;
+
     const data= await getData(token);
 
 
@@ -29,7 +29,7 @@ export default async function Header() {
                 <Image src={'/logo.svg'} width={40} height={40} alt='logo'/>
             </Link>
 
-            {data ?<LogInHeader data={data}/> :  <LogInHeader />}
+            <LogInHeader  data={data}/>
 
         </header>
     )
