@@ -11,14 +11,14 @@ const getData= async(token)=>{
         return data.json()        
     }
     
-}
+};
 
 
 export default async function Header() {
-
+    
+    
     const cookieStore = cookies();
     const token= cookieStore.get('token') ? cookieStore.get('token').value :undefined;
-
     const data= await getData(token);
 
 

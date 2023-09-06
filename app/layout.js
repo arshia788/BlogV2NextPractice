@@ -18,7 +18,7 @@ import ToastProvider from 'providers/ToastProvider';
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" dir='ltr'>
       <body className={inter.className}>
         <ToastProvider>
           <StoreProvider>

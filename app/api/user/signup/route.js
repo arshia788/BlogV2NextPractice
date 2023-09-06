@@ -2,7 +2,6 @@ import connectDB from "utils/connectDB";
 
 import User from "models/User";
 import { NextResponse } from "next/server";
-import { hashPassword } from "utils/auth";
 
 import  Jwt  from "jsonwebtoken";
 import {cookies} from 'next/headers'
@@ -101,28 +100,24 @@ export async function POST(req){
         // CREATE USER 
 
         const createdUserData= await User.create(userFullData);
-
         
-        // token ro sakhti 
-        const createdToken= Jwt.sign({_id:createdUserData._id, username:createdUserData.username}, process.env.TOKEN_SECRET);
         
+        // token ro sakhti. 
+        const createdToken = Jwt.sign({ _id: createdUserData._id, username: createdUserData.username }, process.env.TOKEN_SECRET);
 
-        const userToken= {
-            token:createdToken
+
+        const userToken = {
+            token: createdToken
         };
-        
 
-        await User.findByIdAndUpdate(createdUserData._id, userToken, {new:true});
+        await User.findByIdAndUpdate(createdUserData._id, userToken, { new: true });
 
 
         // SETTING TOKEIN IN COOKIE
-        const cookieStore= cookies();
-        cookieStore.set("token", createdToken, {maxAge:60 * 60 * 24* 60});
+        const cookieStore = cookies();
+        cookieStore.set("token", createdToken, { maxAge: 60 * 60 * 24 * 60 });
 
         const send_data={
-            userloged:true,
-            role:3,
-            user_is_active:false,
             userImage:userFullData.default_image,
             blog_slug:userFullData.username
         }
@@ -135,7 +130,6 @@ export async function POST(req){
             
         )
         
-
     } catch (error) {
         return NextResponse.json({status:401, message:"Failed to create a user"})
     }

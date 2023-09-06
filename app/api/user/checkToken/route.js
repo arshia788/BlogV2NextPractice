@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import connectDB from "utils/connectDB";
 import User from "models/User";
+
 import Jwt from "jsonwebtoken";
 
 export async function GET(req) {
@@ -18,14 +19,12 @@ export async function GET(req) {
         connectDB()
         const token = req.headers.get("token");
 
-        const x= process.env.TOKEN_SECRET
-
         const verified = Jwt.verify(token, process.env.TOKEN_SECRET)
-        console.log(verified);
 
 
         const userFullData = await User.findById(verified._id);
 
+        
         send_data = {
             loged: true,
             role: userFullData.role,
@@ -39,7 +38,7 @@ export async function GET(req) {
     } 
     catch (error) {
 
-        // console.log(error);
+        console.log(error);
         return NextResponse.json({ data: "failed to connect" }, { status: 200 });
 
     }
