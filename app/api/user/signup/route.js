@@ -110,6 +110,7 @@ export async function POST(req){
         const userToken= {
             token:createdToken
         };
+        
 
         await User.findByIdAndUpdate(createdUserData._id, userToken, {new:true});
 

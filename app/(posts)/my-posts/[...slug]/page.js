@@ -13,33 +13,50 @@ import LikedPosts from "components/templates/posts/LikedPosts";
 import BookmarkedPosts from "components/templates/posts/BookmarkedPosts";
 
 
-export default function Posts({params}) {
-  
+export default function Posts({ params }) {
+
   const route = params.slug[0];
 
-  const router= useRouter();
+  const router = useRouter();
 
-  const [checkRoute, setCheckRoute]= useState( <MyAllPosts />);
+  const [num, setNum] = useState(0);
 
-  useEffect(()=>{
+  useEffect(() => {
 
-    if(route !== "all" && route !== "drafts" && route !== "published" &&route !== "waiting" && route !== "liked" && route !== "bookmarked"){
-      
+    if (route !== "all" && route !== "drafts" && route !== "published" && route !== "waiting" && route !== "liked" && route !== "bookmarked") {
+
       router.push('/my-posts/all')
     }
 
-    if(route==='all') setCheckRoute(<MyAllPosts/>);
-    else if(route === 'drafts') setCheckRoute(<MyDrafts />);
-    else if(route === 'published') setCheckRoute(<MyPublishedPosts />);
-    else if(route === 'waiting') setCheckRoute(<MyWaitingPosts />);
-    else if(route === 'liked') setCheckRoute(<LikedPosts />)
-    else if(route === 'bookmarked') setCheckRoute(<BookmarkedPosts />)
+    if (route === 'all') setNum(1);
+    else if(route === 'drafts') setNum(2)
+    else if(route === 'published') setNum(3)
+    else if(route === 'waiting') setNum(4);
+    else if(route === 'liked') setNum(5)
+    else if(route === 'bookmarked') setNum(6)
 
-  },[])
+  }, [])
 
   return (
-    <div>
-      {checkRoute}
-    </div>
+    <>
+      {
+        num === 1 && <MyAllPosts />
+      }
+      {
+        num === 2 && <MyDrafts />
+      }
+      {
+        num === 3 && <MyPublishedPosts />
+      }
+      {
+        num === 4 && <MyWaitingPosts />
+      }
+      {
+        num === 5 && <LikedPosts />
+      }
+      {
+        num === 6 && <BookmarkedPosts />
+      }
+    </>
   )
 }

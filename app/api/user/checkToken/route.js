@@ -20,8 +20,8 @@ export async function GET(req) {
 
         const x= process.env.TOKEN_SECRET
 
-        const verified =  Jwt.verify(token, process.env.TOKEN_SECRET)
-        console.log('-------------', verified);
+        const verified = Jwt.verify(token, process.env.TOKEN_SECRET)
+        console.log(verified);
 
 
         const userFullData = await User.findById(verified._id);
