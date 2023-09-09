@@ -20,13 +20,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" dir='ltr'>
       <body className={inter.className}>
-        <ToastProvider>
-          <StoreProvider>
+        <StoreProvider>
+          <ToastProvider>
             <Layout>
               {children}
             </Layout>
-          </StoreProvider>
-        </ToastProvider>
+          </ToastProvider>
+        </StoreProvider>
       </body>
     </html>
   )

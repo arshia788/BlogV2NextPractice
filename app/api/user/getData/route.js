@@ -6,7 +6,6 @@ import { NextResponse } from "next/server";
 export async function GET(req){
 
     try {
-
         connectDB();
 
         const user_id = req.headers.get('user-id');

@@ -14,6 +14,12 @@ const userSchema= new Schema({
     displayname:{
         type:String,
         required:true
+    }
+    ,
+    details:{
+        type:String,
+        required:true,
+        default:''
     },
     password:{
         type:String,
@@ -31,6 +37,11 @@ const userSchema= new Schema({
     default_image:{
         type:String,
         required:true
+    }
+    ,
+    image:{
+        type:String,
+        default:'',
     }
     ,
     role:{

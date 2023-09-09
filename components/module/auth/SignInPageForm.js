@@ -47,9 +47,19 @@ export default function SignInPageForm() {
       router.push('/')
 
     } else {
-      toast.error(data.data, {
-        position:'top-right'
-      })
+      toast.error(data.data,{
+        autoClose: 3000,
+
+        theme:'colored',
+        hideProgressBar: false,
+
+        closeOnClick: true,
+
+        pauseOnHover: true,
+
+        draggable: true,
+
+    })  
     }
 
 
@@ -143,7 +153,6 @@ export default function SignInPageForm() {
 
 
       </form>
-      <ToastContainer />
     </>
 
   )

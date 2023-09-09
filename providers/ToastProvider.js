@@ -10,27 +10,6 @@ export default function ToastProvider({ children }) {
             {children}
             <ToastContainer
 
-                bodyClassName={() => "font-[vazirmedium] text-sm flex items-center"}
-
-                position="top-right"
-
-                autoClose={3000}
-
-                theme="colored"
-
-                hideProgressBar={false}
-
-                newestOnTop={false}
-
-                closeOnClick
-
-                rtl={true}
-
-                pauseOnFocusLoss
-
-                draggable
-
-                pauseOnHover
 
             />
         </div>

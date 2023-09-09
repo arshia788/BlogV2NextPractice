@@ -276,7 +276,6 @@ export default function SignUpPageForm() {
 
 
       </form>
-      <ToastContainer />
     </>
   )
 }
