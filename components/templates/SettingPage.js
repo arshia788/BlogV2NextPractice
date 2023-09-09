@@ -1,6 +1,7 @@
 'use client';
 
 import axios from "axios";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 
@@ -16,14 +17,15 @@ export default function SettingPage({ token }) {
 
     const [defaultValue, setDefaultValue] = useState(null);
     const [isLoading, setIsloading] = useState(true);
-
+    
+    const [defaultImageUser,setDefaultImageUser ]= useState(null);
 
     const usernameRef = useRef();
     const blog_nameRef = useRef();
     const displaynameRef = useRef();
     const passwordRef = useRef();
 
-
+    console.log(defaultImageUser);
 
     useEffect(() => {
 
@@ -32,6 +34,7 @@ export default function SettingPage({ token }) {
             .then(data => {
                 setIsloading(false)
                 setDefaultValue(data.data.data)
+                setDefaultImageUser(data.data.data.default_image)
             })
 
             .catch(error => {
@@ -155,6 +158,21 @@ export default function SettingPage({ token }) {
             })
     }
 
+    const imageUpdater=(e)=>{
+        e.preventDefault();
+
+
+        axios.post('/api/user/update-image', e.target,{headers:{token}})
+
+        .then(data=>{
+            console.log(data.data.data);
+        })
+
+        .catch(err=>{
+            console.log(err.response.data);
+        })
+    }
+
 
 
     return (
@@ -173,6 +191,41 @@ export default function SettingPage({ token }) {
                     />
                     :
                     <div className="flex flex-col gap-12 w-[50%] mx-auto my-8">
+                        
+                        <div className="flex flex-col gap-4">
+                            <label>Weblog-Picture</label>
+
+                            <div className="flex justify-start items-center gap-4">
+
+                                <div className="relative w-[90px] h-[90px] min-w-[90px]">
+
+                                    <Image src={defaultValue.default_image} 
+                                    fill
+                                    className="object-cover rounded-full"
+                                    alt="userprofile" />
+                                </div>
+
+                                <form onSubmit={imageUpdater} className="flex justify-start items-center gap-x-4">
+
+                                    <input type="file" name="file" id="file"
+                                    className="w-0"
+                                    />
+                                    <label className="bg-pink-500 text-white px-3 py-1 rounded cursor-pointer" htmlFor="file">
+                                        Select a new Picture
+                                    </label>
+
+                                    <button
+                                    type="submit"
+                                    className="bg-blue-700 text-white px-3 py-1 rounded"
+                                    >Update-picture
+                                    </button>
+
+                                </form>
+
+
+                            </div>
+
+                        </div>
 
                         <div className="flex flex-col gap-4">
 

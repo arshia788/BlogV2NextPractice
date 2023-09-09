@@ -7,7 +7,8 @@ export async function middleware (req){
     const path= req.nextUrl.pathname;
     
     if( path === '/api/user/getData'||
-        path === '/api/user/update'
+        path === '/api/user/update'||
+        path === '/api/user/update-image'
     ){
 
         try{

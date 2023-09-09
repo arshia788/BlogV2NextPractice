@@ -10,7 +10,7 @@ export async function GET(req){
 
         const user_id = req.headers.get('user-id');
 
-        const userData= await User.findOne({_id:user_id}).select({username:1, blog_name:1, displayname:1});
+        const userData= await User.findOne({_id:user_id}).select({username:1, blog_name:1, displayname:1, default_image:1, image:1} );
         
 
         return NextResponse.json({data:userData} , {status:200})
