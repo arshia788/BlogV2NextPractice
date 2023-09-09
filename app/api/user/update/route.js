@@ -13,6 +13,7 @@ export async function POST(req) {
 
         const inputData = await req.json();
 
+
         const newData = {
             username: undefined,
             blog_name: undefined,
@@ -20,10 +21,11 @@ export async function POST(req) {
             password: undefined,
         }
 
-        console.log(inputData);
 
         // ?username
         if (inputData.username !== undefined) {
+
+            console.log('ok');
 
             if (!/^[\w\d\s-]+$/.test(inputData.username)) {
                 return NextResponse.json(
@@ -56,6 +58,7 @@ export async function POST(req) {
 
         }
 
+
         // ? BLOG_NAME  
         if (inputData.blog_name !==undefined) {
 
@@ -69,7 +72,6 @@ export async function POST(req) {
             }
 
             const findBlog_name = await User.findOne({ blog_name:inputData.blog_name })
-            console.log(findBlog_name);
 
             if(!findBlog_name || findBlog_name._id === user_id){
                 newData.blog_name = inputData.blog_name;
@@ -125,8 +127,6 @@ export async function POST(req) {
 
             newData.password=hashedPassword
         }
-
-
 
         await User.findByIdAndUpdate(user_id, newData, { new: true });
 

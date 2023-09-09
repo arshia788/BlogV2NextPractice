@@ -5,11 +5,11 @@ import { useEffect, useRef, useState } from "react";
 
 
 // hot-toast
-import {toast, Toaster} from 'react-hot-toast';
+import { toast, Toaster } from 'react-hot-toast';
 
 
 // loading spinner---
-import {ThreeCircles} from 'react-loader-spinner'
+import { ThreeCircles } from 'react-loader-spinner'
 
 
 export default function SettingPage({ token }) {
@@ -39,34 +39,120 @@ export default function SettingPage({ token }) {
             })
     }, [])
 
-    const updater=(e)=>{
-        e.preventDefault();
-
-        
-        const formData={
-            username:usernameRef.current.value === ""? undefined :usernameRef.current.value,
-            
-            blog_name:blog_nameRef.current.value ===""? undefined :blog_nameRef.current.value,
-            
-            displayname:displaynameRef.current.value ===""? undefined :displaynameRef.current.value,
-            
-            password:passwordRef.current.value===""? undefined :passwordRef.current.value ,
-        }
+    // const updater=(e)=>{
+    //     e.preventDefault();
 
 
-        axios.post('/api/user/update', formData,{headers:{token}})
-        
+    //     const formData={
+    //         username:usernameRef.current.value === ""? undefined :usernameRef.current.value,
 
-        .then(data=>{
-            console.log(data.data.data);
+    //         blog_name:blog_nameRef.current.value ===""? undefined :blog_nameRef.current.value,
 
-            // toast.success(data.data.data)
-        })
-        
-        .catch(error=>{
-            console.log(error.response.data);
-        })
+    //         displayname:displaynameRef.current.value ===""? undefined :displaynameRef.current.value,
 
+    //         password:passwordRef.current.value===""? undefined :passwordRef.current.value ,
+    //     }
+
+
+    //     axios.post('/api/user/update', formData,{headers:{token}})
+
+
+    //     .then(data=>{
+    //         console.log(data.data.data);
+    //         toast.success(data.data.data)
+    //     })
+
+    //     .catch(error=>{
+    //         toast.error(error.response.data.data)
+    //         console.log(error.response.data.data);
+    //     })
+
+    // }
+
+
+    const usernameUpdater = (e) => {
+        e.preventDefault()
+
+        const formData = {
+            username: usernameRef.current.value == "" ? undefined : usernameRef.current.value,
+
+        };
+
+        axios.post('/api/user/update', formData, { headers: { token } })
+
+            .then(data => {
+                console.log(data.data.data);
+                toast.success(data.data.data)
+            })
+
+            .catch(error => {
+                toast.error(error.response.data.data)
+                console.log(error.response.data.data);
+            })
+    }
+
+    const blognameUpdater = (e) => {
+        e.preventDefault()
+
+        const formData = {
+            blog_name: blog_nameRef.current.value == "" ? undefined : blog_nameRef.current.value,
+
+        };
+
+        axios.post('/api/user/update', formData, { headers: { token } })
+
+            .then(data => {
+                console.log(data.data.data);
+                toast.success(data.data.data)
+            })
+
+            .catch(error => {
+                toast.error(error.response.data.data)
+                console.log(error.response.data.data);
+            })
+    }
+
+    const displaynameUpdater = (e) => {
+        e.preventDefault()
+
+        const formData = {
+            displayname: displaynameRef.current.value == "" ? undefined : displaynameRef.current.value,
+
+        };
+
+        axios.post('/api/user/update', formData, { headers: { token } })
+
+            .then(data => {
+                console.log(data.data.data);
+                toast.success(data.data.data)
+            })
+
+            .catch(error => {
+                toast.error(error.response.data.data)
+                console.log(error.response.data.data);
+            })
+    }
+
+
+    const passwordUpdater = (e) => {
+        e.preventDefault()
+
+        const formData = {
+            passwrod: passwordRef.current.value == "" ? undefined : passwordRef.current.value,
+
+        };
+
+        axios.post('/api/user/update', formData, { headers: { token } })
+
+            .then(data => {
+                console.log(data.data.data);
+                toast.success(data.data.data)
+            })
+
+            .catch(error => {
+                toast.error(error.response.data.data)
+                console.log(error.response.data.data);
+            })
     }
 
 
@@ -80,56 +166,94 @@ export default function SettingPage({ token }) {
                         height="100"
                         width="100"
                         color="#0f5ee0"
-                        wrapperStyle={{marginTop:'100px'}}
+                        wrapperStyle={{ marginTop: '100px' }}
                         wrapperClass=""
                         visible={true}
                         ariaLabel="three-circles-rotating"
                     />
                     :
-                    <div className="flex flex-col gap-6 w-[50%] mx-auto my-8">
+                    <div className="flex flex-col gap-12 w-[50%] mx-auto my-8">
 
-                    <div className="flex flex-col gap-4">
-                        <label>Username</label>
-                        <input 
-                        defaultValue={defaultValue.username}
-                        ref={usernameRef} type="text" 
-                        className="outline-none rounded p-1 w-full border-2 border-blue-700" />
-                    </div>
-    
-                    <div className="flex flex-col gap-4">
-                        <label>Blog_name</label>
-                        <input
-                        defaultValue={defaultValue.blog_name}
-                        ref={blog_nameRef} type="text" className="outline-none rounded p-1 w-full border-2 border-blue-700" />
-                    </div>
-    
-                    <div className="flex flex-col gap-4">
-                        <label>displayname</label>
-                        <input 
-                        defaultValue={defaultValue.displayname}
-                        ref={displaynameRef} 
-                        type="text" className="outline-none rounded p-1 w-full border-2 border-blue-700" />
-                    </div>
-    
-                    <div className="flex flex-col gap-4">
-                        <label>password</label>
-                        <input 
-                        ref={passwordRef} 
-                        type="text" 
-                        className="outline-none rounded p-1 w-full border-2 border-blue-700" />
+                        <div className="flex flex-col gap-4">
+
+                            <label>Username</label>
+
+                            <div className="flex justify-between items-center ">
+                                <input
+                                    defaultValue={defaultValue.username}
+                                    ref={usernameRef} type="text"
+                                    className="outline-none sm lg:w-[400px] p-1 border-b-2 border-b-blue-400 focus:border-b-blue-700" />
+
+                                <button
+                                    onClick={usernameUpdater}
+                                    type="submit"
+                                    className=" bg-pink-500 px-3 py-1 rounded text-white "
+                                >Update</button>
+
+                            </div>
+
+                        </div>
+
+
+                        <div className="flex flex-col gap-4">
+                            <label>Blog_name</label>
+
+                            <div className="flex justify-between items-center ">
+                                <input
+                                    defaultValue={defaultValue.blog_name}
+                                    ref={blog_nameRef} type="text"
+                                    className="outline-none sm lg:w-[400px] p-1 border-b-2 border-b-blue-400 focus:border-b-blue-700" />
+
+                                <button
+                                    onClick={blognameUpdater}
+                                    type="submit"
+                                    className=" bg-pink-500 px-3 py-1 rounded text-white "
+                                >Update</button>
+
+                            </div>
+
+                        </div>
+
+                        <div className="flex flex-col gap-4">
+                            <label>displayname</label>
+                            <div className="flex justify-between items-center ">
+                                <input
+                                    defaultValue={defaultValue.displayname}
+                                    ref={displaynameRef} type="text"
+                                    className="outline-none sm lg:w-[400px] p-1 border-b-2 border-b-blue-400 focus:border-b-blue-700" />
+
+                                <button
+                                    onClick={displaynameUpdater}
+                                    type="submit"
+                                    className=" bg-pink-500 px-3 py-1 rounded text-white "
+                                >Update</button>
+
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col gap-4">
+                            <label>password</label>
+                            <div className="flex justify-between items-center ">
+                                <input
+                                    ref={passwordRef} type="text"
+                                    className="outline-none sm lg:w-[400px] p-1 border-b-2 border-b-blue-400 focus:border-b-blue-700" />
+
+                                <button
+                                    onClick={passwordUpdater}
+                                    type="submit"
+                                    className=" bg-pink-500 px-3 py-1 rounded text-white "
+                                >Update</button>
+
+                            </div>
+
+                        </div>
 
                     </div>
-    
-                    <button
-                        onClick={updater}
-                        type="submit"
-                        className="w-full bg-pink-500 mt-6 rounded text-white text-center px-3 py-1">Submit changes</button>
-                </div>
-    
+
             }
 
-        
-        <Toaster />
+
+            <Toaster />
         </div>
     )
 }
