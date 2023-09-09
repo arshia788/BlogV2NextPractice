@@ -55,7 +55,8 @@ export async function POST(req){
         const findBlog_name= await User.findOne({blog_name})
         if(findBlog_name) return NextResponse.json({status:402},{data:"Enter another Blog_name!"})
         
-        
+
+
         // CONVERT PASSWORD & USERNAME. 
         const newUsername= username.replace(/\s+/g,'-').toLowerCase();
 
@@ -70,6 +71,7 @@ export async function POST(req){
 
         // hash
         const hashedPassword= await bcrypt.hash(newPassword, 13);
+        console.log(hashedPassword);
 
         const date= new Date();
         
@@ -78,12 +80,14 @@ export async function POST(req){
             blog_name:blog_name,
             username:newUsername,
             displayname:displayname,
+            details:'',
             password:hashedPassword,
             phone:phone,
             createdAt: date.toLocaleDateString("fa-IR",{year:"numeric", month:'long', day:'numeric'}),
 
             default_image:`https://avatars.dicebear.com/api/bottts/${newUsername}.svg`,
-
+            
+            image:'',
 
             role:3,
             active_code:active_code,
@@ -110,6 +114,7 @@ export async function POST(req){
             token: createdToken
         };
 
+
         await User.findByIdAndUpdate(createdUserData._id, userToken, { new: true });
 
 
@@ -131,6 +136,7 @@ export async function POST(req){
         )
         
     } catch (error) {
+        console.log(error);
         return NextResponse.json({status:401, message:"Failed to create a user"})
     }
 }

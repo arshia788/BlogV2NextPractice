@@ -4,6 +4,10 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 
 
+// hot-toast
+import {toast, Toaster} from 'react-hot-toast';
+
+
 // loading spinner---
 import {ThreeCircles} from 'react-loader-spinner'
 
@@ -38,27 +42,31 @@ export default function SettingPage({ token }) {
     const updater=(e)=>{
         e.preventDefault();
 
-
+        
         const formData={
             username:usernameRef.current.value === ""? undefined :usernameRef.current.value,
-
+            
             blog_name:blog_nameRef.current.value ===""? undefined :blog_nameRef.current.value,
-
+            
             displayname:displaynameRef.current.value ===""? undefined :displaynameRef.current.value,
-
+            
             password:passwordRef.current.value===""? undefined :passwordRef.current.value ,
         }
+
 
         axios.post('/api/user/update', formData,{headers:{token}})
         
 
         .then(data=>{
-            console.log(data.data);
-        })
+            console.log(data.data.data);
 
+            // toast.success(data.data.data)
+        })
+        
         .catch(error=>{
             console.log(error.response.data);
         })
+
     }
 
 
@@ -120,7 +128,8 @@ export default function SettingPage({ token }) {
     
             }
 
-          
+        
+        <Toaster />
         </div>
     )
 }

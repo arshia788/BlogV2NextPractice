@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 
 // toast
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // redux
@@ -27,7 +27,7 @@ export default function SignUpPageForm() {
   const [userBlog, setUserBlog]= useState('');
 
   useEffect(()=>{
-    if(userBlog) router.push(`/profile/signup/${userBlog}`)
+    if(userBlog) router.push(`/profile/${userBlog}`)
   },[userBlog])
 
 
@@ -64,6 +64,7 @@ export default function SignUpPageForm() {
 
     
     .then(data => {
+
 
         if (data.data.data.userImage) {
 
