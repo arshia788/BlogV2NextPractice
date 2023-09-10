@@ -29,7 +29,7 @@ export async function GET(req) {
             loged: true,
             role: userFullData.role,
             user_is_active: userFullData.user_is_active,
-            user_image: userFullData.default_image,
+            user_image: userFullData.image !== "" ? userFullData.image :userFullData.default_image,
             blog_slug:userFullData.blog_name
         }
 

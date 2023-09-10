@@ -20,10 +20,10 @@ import { userIsActiveToTrue } from 'redux/feaures/user_is_active';
 
 export default function LogInHeader({data}) {
 
-    
+
     const dispatch= useDispatch();
 
-    
+    console.log(data?.data.user_image);    
     dispatch(setUserImageSlice(data?.data.user_image));
 
     dispatch(setRoleValue(data?.data.role));

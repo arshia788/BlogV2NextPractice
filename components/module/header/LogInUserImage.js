@@ -23,10 +23,12 @@ export default function LogInUserImage() {
     <div>
       {
         userImage ?
+        <div className="w-[50px] h-[50px] relative">
           <Image 
-          className="cursor-pointer "
+          className="cursor-pointer object-cover rounded-full"
           onClick={()=> setMenu(!menu)}
-          src={userImage} alt="userImage" width={50} height={50}/>
+          src={userImage} alt="userImage" fill />
+          </div>
         :
         <Link href={'/signin'} className="bg-white px-2 py-1 text-blue-700 rounded">
           Sign-in/Sgin-up

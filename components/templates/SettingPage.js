@@ -4,36 +4,40 @@ import axios from "axios";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-
 // hot-toast
 import { toast, Toaster } from 'react-hot-toast';
-
 
 // loading spinner---
 import { ThreeCircles } from 'react-loader-spinner'
 
+// redux---
+import { useDispatch } from "react-redux";
+
+// redux-actions---
+import { setUserImageSlice } from "redux/feaures/userImageSlice";
 
 export default function SettingPage({ token }) {
 
     const [defaultValue, setDefaultValue] = useState(null);
     const [isLoading, setIsloading] = useState(true);
-
-    console.log(defaultValue);
-    
     const [defaultImageUser,setDefaultImageUser ]= useState('');
+    const [reloadUserImg, setReloadUserImg]= useState(false);
+
+    const dispatch= useDispatch();    
 
     const usernameRef = useRef();
     const blog_nameRef = useRef();
     const displaynameRef = useRef();
     const passwordRef = useRef();
 
-    console.log(defaultImageUser);
 
     useEffect(() => {
 
         axios.get('/api/user/getData', { headers: { token } })
 
             .then(data => {
+                
+                dispatch(setUserImageSlice(data.data.data.image))
                 setIsloading(false)
                 setDefaultValue(data.data.data)
             })
@@ -41,37 +45,7 @@ export default function SettingPage({ token }) {
             .catch(error => {
                 console.log(error);
             })
-    }, [])
-
-    // const updater=(e)=>{
-    //     e.preventDefault();
-
-
-    //     const formData={
-    //         username:usernameRef.current.value === ""? undefined :usernameRef.current.value,
-
-    //         blog_name:blog_nameRef.current.value ===""? undefined :blog_nameRef.current.value,
-
-    //         displayname:displaynameRef.current.value ===""? undefined :displaynameRef.current.value,
-
-    //         password:passwordRef.current.value===""? undefined :passwordRef.current.value ,
-    //     }
-
-
-    //     axios.post('/api/user/update', formData,{headers:{token}})
-
-
-    //     .then(data=>{
-    //         console.log(data.data.data);
-    //         toast.success(data.data.data)
-    //     })
-
-    //     .catch(error=>{
-    //         toast.error(error.response.data.data)
-    //         console.log(error.response.data.data);
-    //     })
-
-    // }
+    }, [reloadUserImg])
 
 
     const usernameUpdater = (e) => {
@@ -166,6 +140,7 @@ export default function SettingPage({ token }) {
         axios.post('/api/user/update-image', e.target,{headers:{token}})
 
         .then(data=>{
+            setReloadUserImg(!reloadUserImg)
             console.log(data.data.data);
             toast.success(data.data.data)
         })
@@ -201,8 +176,11 @@ export default function SettingPage({ token }) {
 
                                 <div className="relative w-[90px] h-[90px] min-w-[90px]">
 
-                                    <Image 
-                                    src={defaultValue.image !== '' ? defaultValue.image: defaultValue.default_image}
+                                    <Image
+                                     
+                                    src={defaultValue.image !== '' ? defaultValue.image : defaultValue.default_image
+                                    }
+
                                     fill
                                     className="object-cover rounded-full"
                                     alt="userprofile" />

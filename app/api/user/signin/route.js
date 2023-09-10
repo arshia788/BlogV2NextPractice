@@ -53,7 +53,7 @@ export async function POST(req){
         const send_data={
             role:userFullData.role,
             user_is_active:userFullData.user_is_active,
-            userImage:userFullData.default_image,
+            userImage:userFullData.image !== "" ? userFullData.image :userFullData.default_image,
             blog_slug:userFullData.username
         }
 
