@@ -1,10 +1,31 @@
 import LinkItem from "./LinkItem";
+import Cookies from "js-cookie";
 
-
+// icons---
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+
+// redux---
+import { useDispatch } from "react-redux";
+
+// redux-actions---
+import { setUserImageSlice } from "redux/feaures/userImageSlice";
+import { setRoleValue } from "redux/feaures/roleSlice";
+import { checkingLogged } from "redux/feaures/logeedSlice";
 
 
 export default function UserMenu({ menu, setMenu }) {
+
+  const dispatch= useDispatch();
+
+  function logOutHandler(){
+    Cookies.set('token','', {expires:0});
+
+    dispatch(setRoleValue(4));
+    dispatch(checkingLogged(false));
+    dispatch(setUserImageSlice())
+
+  }
+
 
   return (
     <div className={
@@ -31,6 +52,11 @@ export default function UserMenu({ menu, setMenu }) {
         <LinkItem title='waiting' link={'/my-posts/waiting'} />
         <LinkItem title='bookmarked' link={'/my-posts/bookmarked'} />
         <LinkItem title='liked' link={'/my-posts/liked'} />
+
+        <button
+        onClick={logOutHandler}
+        className="bg-red-500 rounded px-2 py-2 text-[1.1rem] text-white"
+        >LogOut</button>
       </div>
 
     </div>

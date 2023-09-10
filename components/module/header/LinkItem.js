@@ -1,9 +1,26 @@
+'use client';
+
 import Link from "next/link";
 
+import { usePathname } from "next/navigation";
+
 export default function LinkItem({title, link}) {
+
+  const path= usePathname();
+  console.log('li---',link);
+  console.log('pa---',path);
+
+  
   return (
     <Link 
-    className="w-[200px] px-3 py-2 rounded bg-zinc-400 text-white  transition-all duration-300 hover:bg-blue-700 hover:text-white text-center text-[1.2rem]"
+    className=
+    {
+      path === link ?
+      "w-[200px] px-3 py-2 rounded  text-white  transition-all duration-300 bg-blue-700 hover:text-white text-center text-[1.1rem]"
+      :
+      "w-[200px] px-3 py-2 rounded  text-white  transition-all duration-300  hover:text-white text-center text-[1.1rem]"
+    }
+
     href={link}>
         {title}
     </Link>
