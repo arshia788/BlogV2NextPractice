@@ -17,8 +17,10 @@ export default function SettingPage({ token }) {
 
     const [defaultValue, setDefaultValue] = useState(null);
     const [isLoading, setIsloading] = useState(true);
+
+    console.log(defaultValue);
     
-    const [defaultImageUser,setDefaultImageUser ]= useState(null);
+    const [defaultImageUser,setDefaultImageUser ]= useState('');
 
     const usernameRef = useRef();
     const blog_nameRef = useRef();
@@ -34,7 +36,6 @@ export default function SettingPage({ token }) {
             .then(data => {
                 setIsloading(false)
                 setDefaultValue(data.data.data)
-                setDefaultImageUser(data.data.data.default_image)
             })
 
             .catch(error => {
@@ -166,6 +167,7 @@ export default function SettingPage({ token }) {
 
         .then(data=>{
             console.log(data.data.data);
+            toast.success(data.data.data)
         })
 
         .catch(err=>{
@@ -199,7 +201,8 @@ export default function SettingPage({ token }) {
 
                                 <div className="relative w-[90px] h-[90px] min-w-[90px]">
 
-                                    <Image src={defaultValue.default_image} 
+                                    <Image 
+                                    src={defaultValue.image !== '' ? defaultValue.image: defaultValue.default_image}
                                     fill
                                     className="object-cover rounded-full"
                                     alt="userprofile" />
@@ -207,17 +210,26 @@ export default function SettingPage({ token }) {
 
                                 <form onSubmit={imageUpdater} className="flex justify-start items-center gap-x-4">
 
-                                    <input type="file" name="file" id="file"
+                                    <input 
+                                    onChange={
+                                        (e)=> setDefaultImageUser(e.target.files[0].name)
+                                    }
+                                    type="file" name="file" id="file"
                                     className="w-0"
                                     />
                                     <label className="bg-pink-500 text-white px-3 py-1 rounded cursor-pointer" htmlFor="file">
-                                        Select a new Picture
+                                        {
+                                            defaultImageUser === "" ?
+                                            'Select a new Picture'
+                                            :
+                                            "Upload the image"
+                                        }
                                     </label>
 
                                     <button
                                     type="submit"
                                     className="bg-blue-700 text-white px-3 py-1 rounded"
-                                    >Update-picture
+                                    >Upload-Img
                                     </button>
 
                                 </form>

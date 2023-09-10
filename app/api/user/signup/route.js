@@ -72,7 +72,7 @@ export async function POST(req){
         // hash
         const hashedPassword= await bcrypt.hash(newPassword, 13);
         console.log(hashedPassword);
-
+        
         const date= new Date();
         
         const userFullData={

@@ -17,73 +17,57 @@ export async function POST(req) {
 
     try {
         connectDB();
-
-        const user_id= await req.headers.get('user-id');
-        
+  
         const formData = await req.formData();
-        const file = formData.get('file');
-
-        if(!file){
-            return NextResponse.json(
-                {data:'please enter file'},{status:400}
-            )
+  
+        const file = formData.get("file");
+        if (!file) {
+           return NextResponse.json({}, { status: 400 });
         }
-
-        if(file.size < 1){
-            return NextResponse.json(
-                {data:'please enter file'},{status:400}
-            )
+        if (file.size < 1) {
+           return NextResponse.json({ data: " please select a file  " }, { status: 400 });
         }
-
-        if(file.type < 1){
-            return NextResponse.json(
-                {data:'please enter file'},{status:400}
-            )
+        if (file.size > 2000000) {
+           return NextResponse.json({ data: "it should be less than 2mb" }, { status: 400 });
         }
-
-        const fileDestination= path.join(process.cwd(), 'public/uploads')
-        const fileArrayBuffer= await file.arrayBuffer();
-
-        if(!existsSync(fileDestination)){
-            fs.mkdir(fileDestination, {recursive:true})
-        };
-
-        const fileName= Date.now() + file.name;
-        const fileUrl = fileDestination + '/' + fileName;
-
+  
+      //   in ham baray type on file hast 
+        if (file.type!="image/jpeg" && file.type!="image/jpg" && file.type!='image/png' ) {
+           return NextResponse.json({ data: "Only supports jpeg/jpg/png" }, { status: 400 });
+        }
+        
+  
+        const destinationDirPath = path.join(process.cwd(), "public/uploads");
+        const fileArrayBuffer = await file.arrayBuffer();
+  
+  
+        if (!existsSync(destinationDirPath)) {
+           fs.mkdir(destinationDirPath, { recursive: true });
+        }
+  
+  
+        const newname = Date.now() + file.name;
+  
+          // inja omadi faght gofti uploads chon niazi be goftan public nist  
+        const fileUrl = "/uploads/" + newname;
+  
         await fs.writeFile(
-            path.join(fileDestination, fileName),
-            Buffer.from(fileArrayBuffer)
-        )
-
-        newData.image= fileUrl
-        
-
-        await User.findByIdAndUpdate(user_id, newData, {new:true})
-
-        return NextResponse.json(
-            {data:"User Image updated"},
-            {status:200}
-        )
-        
-    } catch (error) {
+           path.join(destinationDirPath, newname),
+           Buffer.from(fileArrayBuffer)
+        );
+  
+        const newData={
+           image:fileUrl
+        }
+        const user_id = req.headers.get("user-id");
+        await User.findByIdAndUpdate(user_id, newData, { new: true })
+  
+        return NextResponse.json({ data: "User image Updated" }, { status: 200 });
+  
+       
+     } catch (error) {
         console.log(error);
-        return NextResponse.json(
-            {data:'failed to update the user image'},
-            {status:402}
-        )
-    }
-
-
-
-
+        return NextResponse.json({ data: "خطا ", }, { status: 401 });
+     }
+  
 }
-
-
-
-
-
-
-
-
-

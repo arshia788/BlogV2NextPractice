@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation';
 
 // toast
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // redux
@@ -39,9 +39,11 @@ export default function SignInPageForm() {
 
     if (data.data.userImage) {
       
+      console.log(data.data);
       dispatch(setUserImageSlice(data.data.userImage))
       dispatch(setRoleValue(data.data.role))
       dispatch(checkingLogged(data.data.logged))
+
       toast.success("You have logged");
 
       router.push('/')

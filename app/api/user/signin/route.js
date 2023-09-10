@@ -9,11 +9,10 @@ import bcrypt from 'bcrypt';
 
 export async function POST(req){
     try {
-        await connectDB()
+        connectDB()
 
         const body= await req.json();
         const {phone, password}= body;
-
        
 
         if(phone.length !==10){
@@ -36,8 +35,9 @@ export async function POST(req){
 
         if(!userFullData) return NextResponse.json({status:402, data:"No user exists"})
 
-        const checkPassword= await bcrypt.compare(password, userFullData.password);
 
+        const checkPassword= await bcrypt.compare(password, userFullData.password);
+        
         if(!checkPassword) return NextResponse.json({data:"Password is wrong."});
 
 
@@ -60,9 +60,7 @@ export async function POST(req){
 
         return NextResponse.json(
             {data:send_data},
-            {status:200},
-            {message:'user created'},
-            
+            {status:200},            
         )
         
 
