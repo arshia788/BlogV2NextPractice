@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
@@ -10,14 +11,13 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // redux
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 
 // actions-redux
 import { checkingLogged } from 'redux/feaures/logeedSlice';
 import { setRoleValue } from 'redux/feaures/roleSlice';
 import { setUserImageSlice } from 'redux/feaures/userImageSlice';
-import { useEffect, useState } from 'react';
-
+import { setUsername } from 'redux/feaures/usernameSlice';
 
 export default function SignUpPageForm() {
 
@@ -72,6 +72,7 @@ export default function SignUpPageForm() {
           dispatch(checkingLogged(true))
           dispatch(setUserImageSlice(data.data.data.userImage))
           setUserBlog(data.data.data.blog_slug)
+          dispatch(setUsername(data.data.data.blog_slug))
 
           toast.success("User created!", {
             position: "top-right",
@@ -85,7 +86,7 @@ export default function SignUpPageForm() {
             draggable: true,
 
             progress: undefined,
-          })
+          });
 
         }
 
@@ -137,7 +138,7 @@ export default function SignUpPageForm() {
             <input
               autoComplete='off'
               type="text"
-              placeholder="userName..."
+              placeholder="user-name..."
               className="rounded w-full shadow-[0px_10px_5px_rgba(0,0,0,0.45)] outline-none p-2 border focus:border-dashed focus:border-pink-500"
               {...register('username', {
                 required: true,
@@ -182,7 +183,7 @@ export default function SignUpPageForm() {
 
             <input type="text"
               autoComplete='off'
-              placeholder="weblogName..."
+              placeholder="weblog-name..."
               className="rounded w-full shadow-[0px_10px_5px_rgba(0,0,0,0.45)] outline-none p-2 border focus:border-dashed focus:border-pink-500"
               {...register('blog_name', {
                 required: true,

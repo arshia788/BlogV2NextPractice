@@ -5,15 +5,19 @@ import Cookies from "js-cookie";
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 // redux---
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // redux-actions---
 import { setUserImageSlice } from "redux/feaures/userImageSlice";
 import { setRoleValue } from "redux/feaures/roleSlice";
 import { checkingLogged } from "redux/feaures/logeedSlice";
-
+import { setUsername } from "redux/feaures/usernameSlice";
 
 export default function UserMenu({ menu, setMenu }) {
+
+
+  const userName= useSelector(store=> store.usernameSlice.value); 
+  console.log(userName);
 
   const dispatch= useDispatch();
 
@@ -22,7 +26,9 @@ export default function UserMenu({ menu, setMenu }) {
 
     dispatch(setRoleValue(4));
     dispatch(checkingLogged(false));
-    dispatch(setUserImageSlice())
+    dispatch(setUserImageSlice());
+    dispatch(setUsername(''));
+    setMenu(!menu);
 
   }
 
@@ -40,7 +46,8 @@ export default function UserMenu({ menu, setMenu }) {
         onClick={() => setMenu(false)}
         className="text-white w-8 cursor-pointer h-8 absolute right-1 top-3" />
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
+        <LinkItem title='My-blogs' link={`/blogs/${userName}`}/>
         <LinkItem title='setting' link={'/setting'} />
         <LinkItem title='notifications' link={'/notifications'} />
         <LinkItem title='followers' link={'/follow/followers'} />
@@ -54,9 +61,10 @@ export default function UserMenu({ menu, setMenu }) {
         <LinkItem title='liked' link={'/my-posts/liked'} />
 
         <button
+        
         onClick={logOutHandler}
         className="bg-red-500 rounded px-2 py-2 text-[1.1rem] text-white"
-        >LogOut</button>
+        >Logout</button>
       </div>
 
     </div>

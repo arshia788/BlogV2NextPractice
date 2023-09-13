@@ -7,8 +7,6 @@ import { usePathname } from "next/navigation";
 export default function LinkItem({title, link}) {
 
   const path= usePathname();
-  console.log('li---',link);
-  console.log('pa---',path);
 
   
   return (

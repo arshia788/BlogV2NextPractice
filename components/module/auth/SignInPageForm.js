@@ -9,17 +9,23 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+// reudx-slices---
+import usernameSlice from 'redux/feaures/usernameSlice';
 
 // redux--actions
 import { setUserImageSlice } from 'redux/feaures/userImageSlice';
 import { setRoleValue } from 'redux/feaures/roleSlice';
 import { checkingLogged } from 'redux/feaures/logeedSlice';
+import { setUsername } from 'redux/feaures/usernameSlice';
 
 export default function SignInPageForm() {
 
   const router = useRouter();
   const dispatch= useDispatch();
+  const nameStore= useSelector(store=> store.usernameSlice.name)
+
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
@@ -38,15 +44,15 @@ export default function SignInPageForm() {
     const data = await res.json()
 
     if (data.data.userImage) {
-      
-      console.log(data.data);
       dispatch(setUserImageSlice(data.data.userImage))
       dispatch(setRoleValue(data.data.role))
       dispatch(checkingLogged(data.data.logged))
-
+      dispatch(setUsername(data.data.blog_slug))
+      console.log('---',nameStore);
+      console.log(data.data.blog_slug);
       toast.success("You have logged");
 
-      router.push('/')
+      // router.push('/')
 
     } else {
       toast.error(data.data,{

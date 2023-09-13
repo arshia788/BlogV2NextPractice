@@ -25,7 +25,6 @@ export async function POST(req) {
         // ?username
         if (inputData.username !== undefined) {
 
-            console.log('ok');
 
             if (!/^[\w\d\s-]+$/.test(inputData.username)) {
                 return NextResponse.json(
@@ -64,7 +63,6 @@ export async function POST(req) {
 
 
             if (inputData.blog_name.length < 6 || inputData.blog_name.length > 20) {
-                console.log('bug');
                 return NextResponse.json(
                     { data: "the length of the usernmae shoudl be more than 6 and less than 20 characters" },
                     { status: 402 },
@@ -88,7 +86,6 @@ export async function POST(req) {
         // ? DISPLAYNAME--
         if (inputData.displayname !==undefined) {
 
-            console.log('OkO');
             
             if (inputData.displayname.length < 6 || inputData.displayname.length > 20) {
                 return NextResponse.json(
@@ -117,7 +114,6 @@ export async function POST(req) {
 
             if (inputData.password.length < 8 || inputData.password.length > 24) {
 
-                console.log('asdlkasdlasd');
                 return NextResponse.json({ data: "there shoudl be at least 8 characters and no more than 20" }, { status: 402 });
             }
             

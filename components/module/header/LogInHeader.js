@@ -9,24 +9,27 @@ import { FiMoon } from 'react-icons/fi';
 import { BsSun } from 'react-icons/bs';
 
 // redux--
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+// redux-selector---
+import usernameSlice from 'redux/feaures/usernameSlice';
 
 // redux-actions---
 import { setUserImageSlice } from 'redux/feaures/userImageSlice';
 import { setRoleValue } from 'redux/feaures/roleSlice';
 import { checkingLogged } from 'redux/feaures/logeedSlice';
 import { userIsActiveToTrue } from 'redux/feaures/user_is_active';
-
+import { setUsername } from 'redux/feaures/usernameSlice';
 
 export default function LogInHeader({data}) {
 
-
     const dispatch= useDispatch();
+    
 
-    console.log(data?.data.user_image);    
     dispatch(setUserImageSlice(data?.data.user_image));
-
     dispatch(setRoleValue(data?.data.role));
+    dispatch(setUsername(data?.data.blog_slug));
+    
     {data?.data.loged ?dispatch(checkingLogged(data?.data.loged)) :null};
 
 
@@ -37,7 +40,6 @@ export default function LogInHeader({data}) {
         <div className='flex justify-between items-center gap-x-4 '>
 
             <HeaderSearch />
-
         
 
             {/* notif */}

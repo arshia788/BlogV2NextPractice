@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 
 // redux-actions---
 import { setUserImageSlice } from "redux/feaures/userImageSlice";
+import usernameSlice from "redux/feaures/usernameSlice";
 
 export default function SettingPage({ token }) {
 

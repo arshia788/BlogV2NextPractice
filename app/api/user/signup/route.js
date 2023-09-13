@@ -124,7 +124,7 @@ export async function POST(req){
 
         const send_data={
             userImage:userFullData.default_image,
-            blog_slug:userFullData.username
+            blog_slug:userFullData.username,
         }
 
 
