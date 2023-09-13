@@ -24,7 +24,8 @@ export default function SignInPageForm() {
 
   const router = useRouter();
   const dispatch= useDispatch();
-  const nameStore= useSelector(store=> store.usernameSlice.name)
+
+  const nameStore= useSelector(store=> store.usernameSlice.value);
 
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -44,15 +45,13 @@ export default function SignInPageForm() {
     const data = await res.json()
 
     if (data.data.userImage) {
-      dispatch(setUserImageSlice(data.data.userImage))
-      dispatch(setRoleValue(data.data.role))
-      dispatch(checkingLogged(data.data.logged))
-      dispatch(setUsername(data.data.blog_slug))
-      console.log('---',nameStore);
-      console.log(data.data.blog_slug);
+      dispatch(setUsername(data.data.blog_slug));
+      dispatch(setUserImageSlice(data.data.userImage));
+      dispatch(setRoleValue(data.data.role));
+      dispatch(checkingLogged(data.data.logged));
       toast.success("You have logged");
 
-      // router.push('/')
+      router.push(`/profile/${data.data.blog_slug}`)
 
     } else {
       toast.error(data.data,{

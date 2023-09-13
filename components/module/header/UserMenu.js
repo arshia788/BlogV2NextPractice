@@ -47,7 +47,7 @@ export default function UserMenu({ menu, setMenu }) {
         className="text-white w-8 cursor-pointer h-8 absolute right-1 top-3" />
 
       <div className="flex flex-col gap-2">
-        <LinkItem title='My-blogs' link={`/blogs/${userName}`}/>
+        <LinkItem title='My-blogs' link={`/profile/${userName}`}/>
         <LinkItem title='setting' link={'/setting'} />
         <LinkItem title='notifications' link={'/notifications'} />
         <LinkItem title='followers' link={'/follow/followers'} />
